@@ -26,8 +26,8 @@ const theme = createTheme(
         quaternary: "#333",
     },
     {
-        primary: "Montserrat",
-        secondary: "Helvetica",
+        primary: "'Exo 2'",
+        secondary: "Hattori Hanzo",
     },
 )
 
