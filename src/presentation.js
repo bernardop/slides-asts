@@ -13,7 +13,7 @@ import createTheme from "spectacle/lib/themes/default"
 require("normalize.css")
 
 const images = {
-    dpzLogo: require("./images/dpz-logo.png"),
+    dpzLogo: require("./images/dpz-logo.png")
 }
 
 preloader(images)
@@ -23,12 +23,12 @@ const theme = createTheme(
         primary: "#0078ae",
         secondary: "#fff",
         tertiary: "#e31837",
-        quaternary: "#333",
+        quaternary: "#333"
     },
     {
         primary: "'Exo 2'",
-        secondary: "Hattori Hanzo",
-    },
+        secondary: "Hattori Hanzo"
+    }
 )
 
 export default class Presentation extends React.Component {
