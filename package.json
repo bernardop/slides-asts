@@ -3,8 +3,10 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "emotion": "^9.0.2",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
+        "react-emotion": "^9.0.2",
         "spectacle-scripts": "2.0.0"
     },
     "scripts": {
