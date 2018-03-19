@@ -3,7 +3,20 @@ import React from "react"
 import styled from "react-emotion"
 
 // Import Spectacle Core tags
-import { Appear, Deck, Heading, Image, List, ListItem, Magic, Slide, Text, Layout, Fill } from "spectacle"
+import {
+    Appear,
+    Deck,
+    Heading,
+    Image,
+    List,
+    ListItem,
+    Magic,
+    Slide,
+    Text,
+    Layout,
+    Fill,
+    Fit
+} from "spectacle"
 
 import preloader from "spectacle/lib/utils/preloader"
 
@@ -14,16 +27,22 @@ import createTheme from "spectacle/lib/themes/default"
 require("normalize.css")
 
 const images = {
-    dpzLogo: require("./images/dpz-logo.png")
+    dpzLogo: require("./images/dpz-logo.png"),
+    brianFordTweet: require("./images/briantford_status.png"),
+    eslint: require("./images/eslint.png"),
+    babel: require("./images/babel-10.svg"),
+    webpack: require("./images/webpack.svg"),
+    prettier: require("./images/prettier.png"),
+    uglify: require("./images/uglify.png")
 }
 
 preloader(images)
 
 const theme = createTheme(
     {
-        primary: "#0078ae",
+        primary: "#0c648f",
         secondary: "#fff",
-        tertiary: "#e31837",
+        tertiary: "#e2213e",
         quaternary: "#333"
     },
     {
@@ -32,8 +51,8 @@ const theme = createTheme(
     }
 )
 
-const SlideTitle = ({ children, textColor }) => (
-    <Heading size={3} caps textColor={textColor}>
+const SlideTitle = ({ children, textColor, fit, padding }) => (
+    <Heading size={3} fit={fit} caps textColor={textColor} padding={padding}>
         {children}
     </Heading>
 )
@@ -56,6 +75,10 @@ const FocusedListItem = ({ children }) => (
         {children}
     </PaddedListItem>
 )
+
+const LogoImage = styled(Image)`
+    height: 150px;
+`
 
 export default class Presentation extends React.Component {
     render() {
@@ -84,7 +107,7 @@ export default class Presentation extends React.Component {
                         @bernardop
                     </Text>
                 </Slide>
-                <Slide bgColor="primary">
+                <Slide bgColor="primary" transition={["zoom"]}>
                     <SlideTitle textColor="tertiary">Agenda</SlideTitle>
                     <List color="secondary" textFont="secondary">
                         <AppearingListItem>Why learn ASTs?</AppearingListItem>
@@ -106,8 +129,38 @@ export default class Presentation extends React.Component {
                         <PaddedListItem>ASTs at Domino's</PaddedListItem>
                     </List>
                 </Slide>
-                <Slide bgColor="secondary">
-                    <SlideTitle textColor="primary">Why learn ASTs?</SlideTitle>
+                <Slide bgColor="tertiary" transition={["slide"]}>
+                    <SlideTitle fit textColor="secondary">
+                        Cue obligatory tweet about presentation subject...
+                    </SlideTitle>
+                </Slide>
+                <Slide bgColor="tertiary" transition={["slide"]}>
+                    <SlideTitle textColor="secondary">Why learn ASTs?</SlideTitle>
+                    <Image src={images.brianFordTweet.replace("/", "")} padding="50px 0" />
+                </Slide>
+                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <SlideTitle textColor="primary" padding="0 0 50px 0">
+                        Why learn ASTs?
+                    </SlideTitle>
+                    <Layout>
+                        <Fill>
+                            <LogoImage src={images.eslint.replace("/", "")} />
+                        </Fill>
+                        <Fill>
+                            <LogoImage src={images.babel.replace("/", "")} />
+                        </Fill>
+                        <Fill>
+                            <LogoImage src={images.webpack.replace("/", "")} />
+                        </Fill>
+                    </Layout>
+                    <Layout>
+                        <Fill>
+                            <LogoImage src={images.prettier.replace("/", "")} />
+                        </Fill>
+                        <Fill>
+                            <LogoImage src={images.uglify.replace("/", "")} />
+                        </Fill>
+                    </Layout>
                 </Slide>
             </Deck>
         )
