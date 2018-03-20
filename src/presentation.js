@@ -1,6 +1,6 @@
 // Import React
-import React from "react"
-import styled from "react-emotion"
+import React from "react";
+import styled from "react-emotion";
 
 // Import Spectacle Core tags
 import {
@@ -16,27 +16,31 @@ import {
     Layout,
     Fill,
     Fit
-} from "spectacle"
+} from "spectacle";
 
-import preloader from "spectacle/lib/utils/preloader"
+import preloader from "spectacle/lib/utils/preloader";
 
 // Import theme
-import createTheme from "spectacle/lib/themes/default"
+import createTheme from "spectacle/lib/themes/default";
 
 // Require CSS
-require("normalize.css")
+require("normalize.css");
 
 const images = {
     dpzLogo: require("./images/dpz-logo.png"),
     brianFordTweet: require("./images/briantford_status.png"),
-    eslint: require("./images/eslint.png"),
+    eslint: require("./images/eslint.svg"),
     babel: require("./images/babel-10.svg"),
     webpack: require("./images/webpack.svg"),
     prettier: require("./images/prettier.png"),
-    uglify: require("./images/uglify.png")
-}
+    uglify: require("./images/uglify.png"),
+    babelLodashIn: require("./images/babel-plugin-lodash-in.png"),
+    babelLodashOut: require("./images/babel-plugin-lodash-out.png"),
+    babelOptChainIn: require("./images/babel-chaining-in.png"),
+    babelOptChainOut: require("./images/babel-chaining-out.png")
+};
 
-preloader(images)
+preloader(images);
 
 const theme = createTheme(
     {
@@ -49,23 +53,31 @@ const theme = createTheme(
         primary: "'Exo 2'",
         secondary: "Hattori Hanzo"
     }
-)
+);
 
-const SlideTitle = ({ children, textColor, fit, padding }) => (
-    <Heading size={3} fit={fit} caps textColor={textColor} padding={padding}>
+const SlideTitle = ({ children, textColor, fit, padding, size }) => (
+    <Heading size={size || 3} fit={fit} caps textColor={textColor} padding={padding}>
         {children}
     </Heading>
-)
+);
+
+const SlideTitleSecondary = styled(Heading)`
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    width: 92%;
+`;
 
 const PaddedListItem = styled(ListItem)`
     padding: 10px 0;
-`
+`;
 
 const AppearingListItem = ({ children }) => (
     <Appear>
         <PaddedListItem>{children}</PaddedListItem>
     </Appear>
-)
+);
 
 const FocusedListItem = ({ children }) => (
     <PaddedListItem bold>
@@ -74,16 +86,24 @@ const FocusedListItem = ({ children }) => (
         </span>{" "}
         {children}
     </PaddedListItem>
-)
+);
 
 const LogoImage = styled(Image)`
     height: 150px;
-`
+`;
+
+const FlexFill = styled(Fill)`
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: ${props => props.vAlign || "center"};
+    margin: ${props => props.margin || "0 0 3rem 0"};
+`;
 
 export default class Presentation extends React.Component {
     render() {
         return (
-            <Deck transitionDuration={500} theme={theme}>
+            <Deck contentWidth={1200} transitionDuration={500} theme={theme}>
                 <Slide bgColor="secondary" progressColor="primary">
                     <Heading size={3} lineHeight={1} textColor="primary">
                         ASTronomically Improving Your Developer Experience
@@ -129,13 +149,13 @@ export default class Presentation extends React.Component {
                         <PaddedListItem>ASTs at Domino's</PaddedListItem>
                     </List>
                 </Slide>
-                <Slide bgColor="tertiary" transition={["slide"]}>
-                    <SlideTitle fit textColor="secondary">
+                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <SlideTitle fit textColor="primary">
                         Cue obligatory tweet about presentation subject...
                     </SlideTitle>
                 </Slide>
-                <Slide bgColor="tertiary" transition={["slide"]}>
-                    <SlideTitle textColor="secondary">Why learn ASTs?</SlideTitle>
+                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <SlideTitle textColor="primary">Why learn ASTs?</SlideTitle>
                     <Image src={images.brianFordTweet.replace("/", "")} padding="50px 0" />
                 </Slide>
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
@@ -143,26 +163,59 @@ export default class Presentation extends React.Component {
                         Why learn ASTs?
                     </SlideTitle>
                     <Layout>
-                        <Fill>
+                        <FlexFill>
                             <LogoImage src={images.eslint.replace("/", "")} />
-                        </Fill>
-                        <Fill>
+                        </FlexFill>
+                        <FlexFill>
                             <LogoImage src={images.babel.replace("/", "")} />
-                        </Fill>
-                        <Fill>
+                        </FlexFill>
+                        <FlexFill>
                             <LogoImage src={images.webpack.replace("/", "")} />
-                        </Fill>
+                        </FlexFill>
                     </Layout>
                     <Layout>
-                        <Fill>
-                            <LogoImage src={images.prettier.replace("/", "")} />
-                        </Fill>
-                        <Fill>
+                        <FlexFill>
                             <LogoImage src={images.uglify.replace("/", "")} />
-                        </Fill>
+                        </FlexFill>
+                        <FlexFill>
+                            <LogoImage src={images.prettier.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill>
+                            <Text>JSCodeshift</Text>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        babel-plugin-lodash
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="primary" size={6} textSize="2rem">
+                        Why learn ASTs?
+                    </SlideTitleSecondary>
+                    <Text>In</Text>
+                    <Image src={images.babelLodashIn.replace("/", "")} height="200px" />
+                    <Text>Out</Text>
+                    <Image src={images.babelLodashOut.replace("/", "")} height="220px" />
+                </Slide>
+                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4} fit padding="0 0 48px 0">
+                        @babel/plugin-proposal-optional-chaining
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="primary" size={6} textSize="1.5rem">
+                        Why learn ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
+                            <Text>In</Text>
+                            <Image src={images.babelOptChainIn.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
+                            <Text>Out</Text>
+                            <Image src={images.babelOptChainOut.replace("/", "")} />
+                        </FlexFill>
                     </Layout>
                 </Slide>
             </Deck>
-        )
+        );
     }
 }
