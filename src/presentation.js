@@ -3,20 +3,7 @@ import React from "react";
 import styled from "react-emotion";
 
 // Import Spectacle Core tags
-import {
-    Appear,
-    Deck,
-    Heading,
-    Image,
-    List,
-    ListItem,
-    Magic,
-    Slide,
-    Text,
-    Layout,
-    Fill,
-    Fit
-} from "spectacle";
+import { Appear, Deck, Heading, Image, List, ListItem, Slide, Text, Layout, Fill } from "spectacle";
 
 import preloader from "spectacle/lib/utils/preloader";
 
@@ -192,10 +179,16 @@ export default class Presentation extends React.Component {
                     <SlideTitleSecondary textColor="primary" size={6} textSize="2rem">
                         Why learn ASTs?
                     </SlideTitleSecondary>
-                    <Text>In</Text>
-                    <Image src={images.babelLodashIn.replace("/", "")} height="200px" />
-                    <Text>Out</Text>
-                    <Image src={images.babelLodashOut.replace("/", "")} height="220px" />
+                    <Layout>
+                        <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
+                            <Text textFont="secondary">In</Text>
+                            <Image src={images.babelLodashIn.replace("/", "")} height="200px" />
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
+                            <Text textFont="secondary">Out</Text>
+                            <Image src={images.babelLodashOut.replace("/", "")} height="220px" />
+                        </FlexFill>
+                    </Layout>
                 </Slide>
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4} fit padding="0 0 48px 0">
@@ -206,11 +199,11 @@ export default class Presentation extends React.Component {
                     </SlideTitleSecondary>
                     <Layout>
                         <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
-                            <Text>In</Text>
+                            <Text textFont="secondary">In</Text>
                             <Image src={images.babelOptChainIn.replace("/", "")} />
                         </FlexFill>
                         <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
-                            <Text>Out</Text>
+                            <Text textFont="secondary">Out</Text>
                             <Image src={images.babelOptChainOut.replace("/", "")} />
                         </FlexFill>
                     </Layout>
