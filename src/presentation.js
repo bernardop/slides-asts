@@ -24,7 +24,11 @@ const images = {
     babelLodashIn: require("./images/babel-plugin-lodash-in.png"),
     babelLodashOut: require("./images/babel-plugin-lodash-out.png"),
     babelOptChainIn: require("./images/babel-chaining-in.png"),
-    babelOptChainOut: require("./images/babel-chaining-out.png")
+    babelOptChainOut: require("./images/babel-chaining-out.png"),
+    eslintEmoji: require("./images/eslint-emoji.png"),
+    eslintAnchor: require("./images/eslint-empty-anchor.png"),
+    githubJSCodeshift: require("./images/github-jscodeshift.png"),
+    githubBabelCodemod: require("./images/github-babel-codemod.png")
 };
 
 preloader(images);
@@ -90,7 +94,7 @@ const FlexFill = styled(Fill)`
 export default class Presentation extends React.Component {
     render() {
         return (
-            <Deck contentWidth={1200} transitionDuration={500} theme={theme}>
+            <Deck contentWidth={1100} transitionDuration={500} theme={theme}>
                 <Slide bgColor="secondary" progressColor="primary">
                     <Heading size={3} lineHeight={1} textColor="primary">
                         ASTronomically Improving Your Developer Experience
@@ -176,7 +180,7 @@ export default class Presentation extends React.Component {
                     <SlideTitle textColor="primary" size={4}>
                         babel-plugin-lodash
                     </SlideTitle>
-                    <SlideTitleSecondary textColor="primary" size={6} textSize="2rem">
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="2rem">
                         Why learn ASTs?
                     </SlideTitleSecondary>
                     <Layout>
@@ -194,7 +198,7 @@ export default class Presentation extends React.Component {
                     <SlideTitle textColor="primary" size={4} fit padding="0 0 48px 0">
                         @babel/plugin-proposal-optional-chaining
                     </SlideTitle>
-                    <SlideTitleSecondary textColor="primary" size={6} textSize="1.5rem">
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
                         Why learn ASTs?
                     </SlideTitleSecondary>
                     <Layout>
@@ -207,6 +211,47 @@ export default class Presentation extends React.Component {
                             <Image src={images.babelOptChainOut.replace("/", "")} />
                         </FlexFill>
                     </Layout>
+                </Slide>
+                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        eslint-plugin-jsx-a11y
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Why learn ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="3rem 0.5rem">
+                            <Image height="200px" src={images.eslintEmoji.replace("/", "")} />
+                            <Image height="200px" src={images.eslintAnchor.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Codemods
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Why learn ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0">
+                            <Image height="500px" src={images.githubJSCodeshift.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill margin="1rem 0 0 0">
+                            <Image height="500px" src={images.githubBabelCodemod.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="primary" transition={["slide", "zoom"]}>
+                    <SlideTitle textColor="tertiary">Agenda</SlideTitle>
+                    <List color="secondary" textFont="secondary">
+                        <PaddedListItem>Why learn ASTs?</PaddedListItem>
+                        <FocusedListItem>What is an AST?</FocusedListItem>
+                        <PaddedListItem>Working with ASTs?</PaddedListItem>
+                        <PaddedListItem>Writing a custom ESLint rule</PaddedListItem>
+                        <PaddedListItem>Writing a custom Babel plugin</PaddedListItem>
+                        <PaddedListItem>ASTs at Domino's</PaddedListItem>
+                    </List>
                 </Slide>
             </Deck>
         );
