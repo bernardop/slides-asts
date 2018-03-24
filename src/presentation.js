@@ -28,7 +28,10 @@ const images = {
     eslintEmoji: require("./images/eslint-emoji.png"),
     eslintAnchor: require("./images/eslint-empty-anchor.png"),
     githubJSCodeshift: require("./images/github-jscodeshift.png"),
-    githubBabelCodemod: require("./images/github-babel-codemod.png")
+    githubBabelCodemod: require("./images/github-babel-codemod.png"),
+    ast: require("./images/ast.svg"),
+    astCode: require("./images/ast-code.png"),
+    astJson: require("./images/ast-json.png")
 };
 
 preloader(images);
@@ -84,11 +87,19 @@ const LogoImage = styled(Image)`
 `;
 
 const FlexFill = styled(Fill)`
-    align-items: center;
+    align-items: ${props => props.hAlign || "center"};
     display: flex;
     flex-direction: column;
     justify-content: ${props => props.vAlign || "center"};
     margin: ${props => props.margin || "0 0 3rem 0"};
+`;
+
+const ImageAbsolute = styled(Image)`
+    bottom: ${props => props.bottom || "auto"};
+    left: ${props => props.left || "auto"};
+    position: absolute;
+    right: ${props => props.right || "auto"};
+    top: ${props => props.top || "auto"};
 `;
 
 export default class Presentation extends React.Component {
@@ -142,7 +153,7 @@ export default class Presentation extends React.Component {
                 </Slide>
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle fit textColor="primary">
-                        Cue obligatory tweet about presentation subject...
+                        Cue obligatory tweet about subject...
                     </SlideTitle>
                 </Slide>
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
@@ -234,11 +245,9 @@ export default class Presentation extends React.Component {
                         Why learn ASTs?
                     </SlideTitleSecondary>
                     <Layout>
-                        <FlexFill margin="1rem 0 0 0">
-                            <Image height="500px" src={images.githubJSCodeshift.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill margin="1rem 0 0 0">
-                            <Image height="500px" src={images.githubBabelCodemod.replace("/", "")} />
+                        <FlexFill margin="3rem 0 0 0">
+                            <Image width="500px" src={images.githubBabelCodemod.replace("/", "")} />
+                            <Image width="500px" src={images.githubJSCodeshift.replace("/", "")} />
                         </FlexFill>
                     </Layout>
                 </Slide>
@@ -252,6 +261,46 @@ export default class Presentation extends React.Component {
                         <PaddedListItem>Writing a custom Babel plugin</PaddedListItem>
                         <PaddedListItem>ASTs at Domino's</PaddedListItem>
                     </List>
+                </Slide>
+                <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        What is an AST?
+                    </SlideTitle>
+                    <Text textFont="secondary">Boring slide with AST definition?</Text>
+                </Slide>
+                <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        What is an AST?
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0">
+                            <Image src={images.astCode.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        What is an AST?
+                    </SlideTitle>
+                    <ImageAbsolute
+                        top="30%"
+                        right="10%"
+                        height="150px"
+                        src={images.astCode.replace("/", "")}
+                    />
+                    <Appear>
+                        <Image margin="3rem 0 0 10rem" height="400px" src={images.ast.replace("/", "")} />
+                    </Appear>
+                </Slide>
+                <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        What is an AST?
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0">
+                            <Image height="500px" src={images.astJson.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
                 </Slide>
             </Deck>
         );

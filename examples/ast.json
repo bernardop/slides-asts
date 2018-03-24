@@ -1,0 +1,48 @@
+{
+    "type": "VariableDeclaration",
+    "declarations": [
+        {
+            "type": "VariableDeclarator",
+            "id": {
+                "type": "Identifier",
+                "name": "pizza"
+            },
+            "init": {
+                "type": "ObjectExpression",
+                "properties": [
+                    {
+                        "type": "ObjectProperty",
+                        "key": {
+                            "type": "Identifier",
+                            "name": "size"
+                        },
+                        "value": {
+                            "type": "StringLiteral",
+                            "value": "large"
+                        }
+                    },
+                    {
+                        "type": "ObjectProperty",
+                        "key": {
+                            "type": "Identifier",
+                            "name": "toppings"
+                        },
+                        "value": {
+                            "type": "ArrayExpression",
+                            "elements": [
+                                {
+                                    "type": "StringLiteral",
+                                    "value": "ham"
+                                },
+                                {
+                                    "type": "StringLiteral",
+                                    "value": "pineapple"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
