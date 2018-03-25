@@ -29,9 +29,12 @@ const images = {
     eslintAnchor: require("./images/eslint-empty-anchor.png"),
     githubJSCodeshift: require("./images/github-jscodeshift.png"),
     githubBabelCodemod: require("./images/github-babel-codemod.png"),
+    sourceCodeIcon: require("./images/source-code.png"),
+    arrowRight: require("./images/arrow-right.jpg"),
     ast: require("./images/ast.svg"),
     astCode: require("./images/ast-code.png"),
-    astJson: require("./images/ast-json.png")
+    astJson: require("./images/ast-json.png"),
+    astJsonTypes: require("./images/ast-json-types.jpg")
 };
 
 preloader(images);
@@ -86,12 +89,21 @@ const LogoImage = styled(Image)`
     height: 150px;
 `;
 
+const StyledImage = styled(Image)`
+    max-height: none !important;
+`;
+
 const FlexFill = styled(Fill)`
     align-items: ${props => props.hAlign || "center"};
+    box-shadow: ${props =>
+        props.highlight ? "inset 1px 1px 5px #e2213e, inset -1px -1px 5px #e2213e" : "none"};
     display: flex;
     flex-direction: column;
+    height: ${props => props.height || "auto"};
     justify-content: ${props => props.vAlign || "center"};
     margin: ${props => props.margin || "0 0 3rem 0"};
+    overflow: ${props => props.overflow || "visible"};
+    padding: ${props => (props.padded ? "1rem" : "0")};
 `;
 
 const ImageAbsolute = styled(Image)`
@@ -100,6 +112,10 @@ const ImageAbsolute = styled(Image)`
     position: absolute;
     right: ${props => props.right || "auto"};
     top: ${props => props.top || "auto"};
+`;
+
+const BoxedText = styled(Text)`
+    border: 1px solid #333;
 `;
 
 export default class Presentation extends React.Component {
@@ -165,24 +181,186 @@ export default class Presentation extends React.Component {
                         Why learn ASTs?
                     </SlideTitle>
                     <Layout>
-                        <FlexFill>
+                        <FlexFill padded={true}>
                             <LogoImage src={images.eslint.replace("/", "")} />
                         </FlexFill>
-                        <FlexFill>
+                        <FlexFill padded={true}>
                             <LogoImage src={images.babel.replace("/", "")} />
                         </FlexFill>
-                        <FlexFill>
+                        <FlexFill padded={true}>
                             <LogoImage src={images.webpack.replace("/", "")} />
                         </FlexFill>
                     </Layout>
                     <Layout>
-                        <FlexFill>
+                        <FlexFill padded={true}>
                             <LogoImage src={images.uglify.replace("/", "")} />
                         </FlexFill>
-                        <FlexFill>
+                        <FlexFill padded={true}>
                             <LogoImage src={images.prettier.replace("/", "")} />
                         </FlexFill>
-                        <FlexFill>
+                        <FlexFill padded={true}>
+                            <Text>JSCodeshift</Text>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" padding="0 0 50px 0">
+                        Why learn ASTs?
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill padded={true} highlight={true}>
+                            <LogoImage src={images.eslint.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.babel.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.webpack.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.uglify.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.prettier.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <Text>JSCodeshift</Text>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" padding="0 0 50px 0">
+                        Why learn ASTs?
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.eslint.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true} highlight={true}>
+                            <LogoImage src={images.babel.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.webpack.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.uglify.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.prettier.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <Text>JSCodeshift</Text>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" padding="0 0 50px 0">
+                        Why learn ASTs?
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.eslint.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.babel.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true} highlight={true}>
+                            <LogoImage src={images.webpack.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.uglify.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.prettier.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <Text>JSCodeshift</Text>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" padding="0 0 50px 0">
+                        Why learn ASTs?
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.eslint.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.babel.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.webpack.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                    <Layout>
+                        <FlexFill padded={true} highlight={true}>
+                            <LogoImage src={images.uglify.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.prettier.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <Text>JSCodeshift</Text>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" padding="0 0 50px 0">
+                        Why learn ASTs?
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.eslint.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.babel.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.webpack.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.uglify.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true} highlight={true}>
+                            <LogoImage src={images.prettier.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <Text>JSCodeshift</Text>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" padding="0 0 50px 0">
+                        Why learn ASTs?
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.eslint.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.babel.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.webpack.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                    <Layout>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.uglify.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true}>
+                            <LogoImage src={images.prettier.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill padded={true} highlight={true}>
                             <Text>JSCodeshift</Text>
                         </FlexFill>
                     </Layout>
@@ -252,7 +430,6 @@ export default class Presentation extends React.Component {
                     </Layout>
                 </Slide>
                 <Slide bgColor="primary" transition={["slide", "zoom"]}>
-                    <SlideTitle textColor="tertiary">Agenda</SlideTitle>
                     <List color="secondary" textFont="secondary">
                         <PaddedListItem>Why learn ASTs?</PaddedListItem>
                         <FocusedListItem>What is an AST?</FocusedListItem>
@@ -264,14 +441,48 @@ export default class Presentation extends React.Component {
                 </Slide>
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
-                        What is an AST?
+                        Compilers at a glance
                     </SlideTitle>
-                    <Text textFont="secondary">Boring slide with AST definition?</Text>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <Image src={images.sourceCodeIcon.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <Image src={images.arrowRight.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="1rem" textFont="secondary">
+                                Lexical Analysis<br />(Tokenization)
+                            </BoxedText>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <Image src={images.arrowRight.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="1rem" textFont="secondary">
+                                Syntax Analysis<br />(Parsing)
+                            </BoxedText>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <Image src={images.arrowRight.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="4rem" textFont="secondary">
+                                AST
+                            </BoxedText>
+                        </FlexFill>
+                    </Layout>
                 </Slide>
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
-                        What is an AST?
+                        Consider this code snippet...
                     </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
                     <Layout>
                         <FlexFill margin="1rem 0 0 0">
                             <Image src={images.astCode.replace("/", "")} />
@@ -280,25 +491,42 @@ export default class Presentation extends React.Component {
                 </Slide>
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
-                        What is an AST?
+                        AST visualization
                     </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
                     <ImageAbsolute
                         top="30%"
                         right="10%"
                         height="150px"
                         src={images.astCode.replace("/", "")}
                     />
-                    <Appear>
-                        <Image margin="3rem 0 0 10rem" height="400px" src={images.ast.replace("/", "")} />
-                    </Appear>
+                    <Image margin="3rem 0 0 10rem" height="400px" src={images.ast.replace("/", "")} />
                 </Slide>
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
-                        What is an AST?
+                        JSON representation
                     </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
                     <Layout>
-                        <FlexFill margin="1rem 0 0 0">
-                            <Image height="500px" src={images.astJson.replace("/", "")} />
+                        <FlexFill margin="1rem 0 0 0" height="500px" overflow="auto" vAlign="flex-start">
+                            <StyledImage src={images.astJson.replace("/", "")} width="750px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        JSON representation
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0" height="500px" overflow="auto" vAlign="flex-start">
+                            <StyledImage src={images.astJsonTypes.replace("/", "")} width="750px" />
                         </FlexFill>
                     </Layout>
                 </Slide>
