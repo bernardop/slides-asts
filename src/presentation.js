@@ -34,7 +34,8 @@ const images = {
     ast: require("./images/ast.svg"),
     astCode: require("./images/ast-code.png"),
     astJson: require("./images/ast-json.png"),
-    astJsonTypes: require("./images/ast-json-types.jpg")
+    astJsonTypes: require("./images/ast-json-types.jpg"),
+    coolStory: require("./images/cool-story.gif")
 };
 
 preloader(images);
@@ -145,6 +146,7 @@ export default class Presentation extends React.Component {
                         @bernardop
                     </Text>
                 </Slide>
+
                 <Slide bgColor="primary" transition={["zoom"]}>
                     <SlideTitle textColor="tertiary">Agenda</SlideTitle>
                     <List color="secondary" textFont="secondary">
@@ -156,6 +158,7 @@ export default class Presentation extends React.Component {
                         <AppearingListItem>ASTs at Domino's</AppearingListItem>
                     </List>
                 </Slide>
+
                 <Slide bgColor="primary">
                     <SlideTitle textColor="tertiary">Agenda</SlideTitle>
                     <List color="secondary" textFont="secondary">
@@ -167,15 +170,18 @@ export default class Presentation extends React.Component {
                         <PaddedListItem>ASTs at Domino's</PaddedListItem>
                     </List>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle fit textColor="primary">
                         Cue obligatory tweet about subject...
                     </SlideTitle>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle textColor="primary">Why learn ASTs?</SlideTitle>
                     <Image src={images.brianFordTweet.replace("/", "")} padding="50px 0" />
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle textColor="primary" padding="0 0 50px 0">
                         Why learn ASTs?
@@ -203,6 +209,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" progressColor="primary">
                     <SlideTitle textColor="primary" padding="0 0 50px 0">
                         Why learn ASTs?
@@ -230,6 +237,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" progressColor="primary">
                     <SlideTitle textColor="primary" padding="0 0 50px 0">
                         Why learn ASTs?
@@ -257,6 +265,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" progressColor="primary">
                     <SlideTitle textColor="primary" padding="0 0 50px 0">
                         Why learn ASTs?
@@ -284,6 +293,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" progressColor="primary">
                     <SlideTitle textColor="primary" padding="0 0 50px 0">
                         Why learn ASTs?
@@ -311,6 +321,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" progressColor="primary">
                     <SlideTitle textColor="primary" padding="0 0 50px 0">
                         Why learn ASTs?
@@ -338,6 +349,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" progressColor="primary">
                     <SlideTitle textColor="primary" padding="0 0 50px 0">
                         Why learn ASTs?
@@ -365,6 +377,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         babel-plugin-lodash
@@ -383,6 +396,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4} fit padding="0 0 48px 0">
                         @babel/plugin-proposal-optional-chaining
@@ -401,6 +415,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         eslint-plugin-jsx-a11y
@@ -415,6 +430,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         Codemods
@@ -429,6 +445,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="primary" transition={["slide", "zoom"]}>
                     <List color="secondary" textFont="secondary">
                         <PaddedListItem>Why learn ASTs?</PaddedListItem>
@@ -439,6 +456,7 @@ export default class Presentation extends React.Component {
                         <PaddedListItem>ASTs at Domino's</PaddedListItem>
                     </List>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         Compilers at a glance
@@ -476,6 +494,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         Consider this code snippet...
@@ -489,6 +508,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         AST visualization
@@ -504,6 +524,7 @@ export default class Presentation extends React.Component {
                     />
                     <Image margin="3rem 0 0 10rem" height="400px" src={images.ast.replace("/", "")} />
                 </Slide>
+
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         JSON representation
@@ -517,6 +538,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                     </Layout>
                 </Slide>
+
                 <Slide bgColor="secondary" progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         JSON representation
@@ -529,6 +551,23 @@ export default class Presentation extends React.Component {
                             <StyledImage src={images.astJsonTypes.replace("/", "")} width="750px" />
                         </FlexFill>
                     </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <Layout>
+                        <Image src={images.coolStory.replace("/", "")} />
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="primary" transition={["fade"]}>
+                    <List color="secondary" textFont="secondary">
+                        <PaddedListItem>Why learn ASTs?</PaddedListItem>
+                        <PaddedListItem>What is an AST?</PaddedListItem>
+                        <FocusedListItem>Working with ASTs?</FocusedListItem>
+                        <PaddedListItem>Writing a custom ESLint rule</PaddedListItem>
+                        <PaddedListItem>Writing a custom Babel plugin</PaddedListItem>
+                        <PaddedListItem>ASTs at Domino's</PaddedListItem>
+                    </List>
                 </Slide>
             </Deck>
         );
