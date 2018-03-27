@@ -39,6 +39,8 @@ const images = {
     astVisualizer: require("./images/ast-visualizer.png"),
     astExplorer: require("./images/ast-explorer.png"),
     visitor: require("./images/visitor.png"),
+    visitorIdentifier: require("./images/visitor-identifier.png"),
+    visitorBinary: require("./images/visitor-binary.png"),
     add2Func: require("./images/add-2-func.png"),
     add2Ast: require("./images/add-2-ast.png"),
     add2Ast1: require("./images/add-2-ast-1.png"),
@@ -584,7 +586,7 @@ export default class Presentation extends React.Component {
                             <Image src={images.add2Ast2.replace("/", "")} width="450px" />
                         </FlexFill>
                         <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.visitorIdentifier.replace("/", "")} width="500px" />
                             <Image src={images.console2.replace("/", "")} width="500px" />
                         </FlexFill>
                     </Layout>
@@ -602,7 +604,7 @@ export default class Presentation extends React.Component {
                             <Image src={images.add2Ast3.replace("/", "")} width="450px" />
                         </FlexFill>
                         <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.visitorIdentifier.replace("/", "")} width="500px" />
                             <Image src={images.console3.replace("/", "")} width="500px" />
                         </FlexFill>
                     </Layout>
@@ -656,7 +658,7 @@ export default class Presentation extends React.Component {
                             <Image src={images.add2Ast6.replace("/", "")} width="450px" />
                         </FlexFill>
                         <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.visitorBinary.replace("/", "")} width="500px" />
                             <Image src={images.console4.replace("/", "")} width="500px" />
                         </FlexFill>
                     </Layout>
@@ -674,7 +676,7 @@ export default class Presentation extends React.Component {
                             <Image src={images.add2Ast7.replace("/", "")} width="450px" />
                         </FlexFill>
                         <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.visitorIdentifier.replace("/", "")} width="500px" />
                             <Image src={images.console5.replace("/", "")} width="500px" />
                         </FlexFill>
                     </Layout>
