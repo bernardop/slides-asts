@@ -3,7 +3,7 @@ import React from "react";
 import styled from "react-emotion";
 
 // Import Spectacle Core tags
-import { Appear, Deck, Heading, Image, List, ListItem, Slide, Text, Layout, Fill } from "spectacle";
+import { Appear, Deck, Heading, Image, Link, List, ListItem, Slide, Text, Layout, Fill } from "spectacle";
 
 import preloader from "spectacle/lib/utils/preloader";
 
@@ -35,7 +35,25 @@ const images = {
     astCode: require("./images/ast-code.png"),
     astJson: require("./images/ast-json.png"),
     astJsonTypes: require("./images/ast-json-types.jpg"),
-    coolStory: require("./images/cool-story.gif")
+    coolStory: require("./images/cool-story.gif"),
+    astVisualizer: require("./images/ast-visualizer.png"),
+    astExplorer: require("./images/ast-explorer.png"),
+    visitor: require("./images/visitor.png"),
+    add2Func: require("./images/add-2-func.png"),
+    add2Ast: require("./images/add-2-ast.png"),
+    add2Ast1: require("./images/add-2-ast-1.png"),
+    add2Ast2: require("./images/add-2-ast-2.png"),
+    add2Ast3: require("./images/add-2-ast-3.png"),
+    add2Ast4: require("./images/add-2-ast-4.png"),
+    add2Ast5: require("./images/add-2-ast-5.png"),
+    add2Ast6: require("./images/add-2-ast-6.png"),
+    add2Ast7: require("./images/add-2-ast-7.png"),
+    add2Ast8: require("./images/add-2-ast-8.png"),
+    console1: require("./images/console1.png"),
+    console2: require("./images/console2.png"),
+    console3: require("./images/console3.png"),
+    console4: require("./images/console4.png"),
+    console5: require("./images/console5.png")
 };
 
 preloader(images);
@@ -65,6 +83,10 @@ const SlideTitleSecondary = styled(Heading)`
     text-transform: uppercase;
     top: 0;
     width: 92%;
+`;
+
+const ListSansBullets = styled(List)`
+    list-style-type: none;
 `;
 
 const PaddedListItem = styled(ListItem)`
@@ -119,10 +141,79 @@ const BoxedText = styled(Text)`
     border: 1px solid #333;
 `;
 
+const StyledLink = styled(Link)`
+    border: 1px solid #333;
+    padding: ${props => props.padding || "0"};
+`;
+
+class AgendaSlideContent extends React.Component {
+    render() {
+        const { focusedIndex } = this.props;
+        const agendaItems = [
+            "Why learn ASTs",
+            "What is an AST?",
+            "Working with ASTs",
+            "Writing a custom ESLint rule",
+            "Writing a custom Babel plugin",
+            "ASTs at Domino's"
+        ];
+
+        return (
+            <React.Fragment>
+                <SlideTitle textColor="tertiary">Agenda</SlideTitle>
+                <ListSansBullets color="secondary" textFont="secondary">
+                    {agendaItems.map(
+                        (agendaItem, index) =>
+                            focusedIndex === index ? (
+                                <FocusedListItem>{agendaItem}</FocusedListItem>
+                            ) : (
+                                <PaddedListItem>{agendaItem}</PaddedListItem>
+                            )
+                    )}
+                </ListSansBullets>
+            </React.Fragment>
+        );
+    }
+}
+
+class LogosSlideContent extends React.Component {
+    render() {
+        return (
+            <React.Fragment>
+                <SlideTitle textColor="primary" padding="0 0 50px 0">
+                    Why learn ASTs?
+                </SlideTitle>
+                <Layout>
+                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 0}>
+                        <LogoImage src={images.eslint.replace("/", "")} />
+                    </FlexFill>
+                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 1}>
+                        <LogoImage src={images.babel.replace("/", "")} />
+                    </FlexFill>
+                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 2}>
+                        <LogoImage src={images.webpack.replace("/", "")} />
+                    </FlexFill>
+                </Layout>
+                <Layout>
+                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 3}>
+                        <LogoImage src={images.uglify.replace("/", "")} />
+                    </FlexFill>
+                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 4}>
+                        <LogoImage src={images.prettier.replace("/", "")} />
+                    </FlexFill>
+                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 5}>
+                        <Text>JSCodeshift</Text>
+                    </FlexFill>
+                </Layout>
+            </React.Fragment>
+        );
+    }
+}
+
 export default class Presentation extends React.Component {
     render() {
         return (
-            <Deck contentWidth={1100} transitionDuration={500} theme={theme}>
+            <Deck contentWidth={1100} transitionDuration={500} theme={theme} progress="pacman">
                 <Slide bgColor="secondary" progressColor="primary">
                     <Heading size={3} lineHeight={1} textColor="primary">
                         ASTronomically Improving Your Developer Experience
@@ -149,26 +240,18 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="primary" transition={["zoom"]}>
                     <SlideTitle textColor="tertiary">Agenda</SlideTitle>
-                    <List color="secondary" textFont="secondary">
+                    <ListSansBullets color="secondary" textFont="secondary">
                         <AppearingListItem>Why learn ASTs?</AppearingListItem>
                         <AppearingListItem>What is an AST?</AppearingListItem>
                         <AppearingListItem>Working with ASTs?</AppearingListItem>
                         <AppearingListItem>Writing a custom ESLint rule</AppearingListItem>
                         <AppearingListItem>Writing a custom Babel plugin</AppearingListItem>
                         <AppearingListItem>ASTs at Domino's</AppearingListItem>
-                    </List>
+                    </ListSansBullets>
                 </Slide>
 
                 <Slide bgColor="primary">
-                    <SlideTitle textColor="tertiary">Agenda</SlideTitle>
-                    <List color="secondary" textFont="secondary">
-                        <FocusedListItem>Why learn ASTs?</FocusedListItem>
-                        <PaddedListItem>What is an AST?</PaddedListItem>
-                        <PaddedListItem>Working with ASTs?</PaddedListItem>
-                        <PaddedListItem>Writing a custom ESLint rule</PaddedListItem>
-                        <PaddedListItem>Writing a custom Babel plugin</PaddedListItem>
-                        <PaddedListItem>ASTs at Domino's</PaddedListItem>
-                    </List>
+                    <AgendaSlideContent focusedIndex={0} />
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
@@ -183,199 +266,31 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
-                    <SlideTitle textColor="primary" padding="0 0 50px 0">
-                        Why learn ASTs?
-                    </SlideTitle>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.eslint.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.babel.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.webpack.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.uglify.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.prettier.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <Text>JSCodeshift</Text>
-                        </FlexFill>
-                    </Layout>
+                    <LogosSlideContent />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" padding="0 0 50px 0">
-                        Why learn ASTs?
-                    </SlideTitle>
-                    <Layout>
-                        <FlexFill padded={true} highlight={true}>
-                            <LogoImage src={images.eslint.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.babel.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.webpack.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.uglify.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.prettier.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <Text>JSCodeshift</Text>
-                        </FlexFill>
-                    </Layout>
+                    <LogosSlideContent highlightedIndex={0} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" padding="0 0 50px 0">
-                        Why learn ASTs?
-                    </SlideTitle>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.eslint.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true} highlight={true}>
-                            <LogoImage src={images.babel.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.webpack.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.uglify.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.prettier.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <Text>JSCodeshift</Text>
-                        </FlexFill>
-                    </Layout>
+                    <LogosSlideContent highlightedIndex={1} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" padding="0 0 50px 0">
-                        Why learn ASTs?
-                    </SlideTitle>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.eslint.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.babel.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true} highlight={true}>
-                            <LogoImage src={images.webpack.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.uglify.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.prettier.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <Text>JSCodeshift</Text>
-                        </FlexFill>
-                    </Layout>
+                    <LogosSlideContent highlightedIndex={2} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" padding="0 0 50px 0">
-                        Why learn ASTs?
-                    </SlideTitle>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.eslint.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.babel.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.webpack.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
-                    <Layout>
-                        <FlexFill padded={true} highlight={true}>
-                            <LogoImage src={images.uglify.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.prettier.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <Text>JSCodeshift</Text>
-                        </FlexFill>
-                    </Layout>
+                    <LogosSlideContent highlightedIndex={3} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" padding="0 0 50px 0">
-                        Why learn ASTs?
-                    </SlideTitle>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.eslint.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.babel.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.webpack.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.uglify.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true} highlight={true}>
-                            <LogoImage src={images.prettier.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <Text>JSCodeshift</Text>
-                        </FlexFill>
-                    </Layout>
+                    <LogosSlideContent highlightedIndex={4} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" padding="0 0 50px 0">
-                        Why learn ASTs?
-                    </SlideTitle>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.eslint.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.babel.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.webpack.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
-                    <Layout>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.uglify.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true}>
-                            <LogoImage src={images.prettier.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill padded={true} highlight={true}>
-                            <Text>JSCodeshift</Text>
-                        </FlexFill>
-                    </Layout>
+                    <LogosSlideContent highlightedIndex={5} />
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
@@ -447,14 +362,7 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="primary" transition={["slide", "zoom"]}>
-                    <List color="secondary" textFont="secondary">
-                        <PaddedListItem>Why learn ASTs?</PaddedListItem>
-                        <FocusedListItem>What is an AST?</FocusedListItem>
-                        <PaddedListItem>Working with ASTs?</PaddedListItem>
-                        <PaddedListItem>Writing a custom ESLint rule</PaddedListItem>
-                        <PaddedListItem>Writing a custom Babel plugin</PaddedListItem>
-                        <PaddedListItem>ASTs at Domino's</PaddedListItem>
-                    </List>
+                    <AgendaSlideContent focusedIndex={1} />
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
@@ -548,7 +456,9 @@ export default class Presentation extends React.Component {
                     </SlideTitleSecondary>
                     <Layout>
                         <FlexFill margin="1rem 0 0 0" height="500px" overflow="auto" vAlign="flex-start">
-                            <StyledImage src={images.astJsonTypes.replace("/", "")} width="750px" />
+                            <Link href="https://github.com/estree/estree" target="_blank">
+                                <StyledImage src={images.astJsonTypes.replace("/", "")} width="750px" />
+                            </Link>
                         </FlexFill>
                     </Layout>
                 </Slide>
@@ -560,14 +470,232 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="primary" transition={["fade"]}>
-                    <List color="secondary" textFont="secondary">
-                        <PaddedListItem>Why learn ASTs?</PaddedListItem>
-                        <PaddedListItem>What is an AST?</PaddedListItem>
-                        <FocusedListItem>Working with ASTs?</FocusedListItem>
-                        <PaddedListItem>Writing a custom ESLint rule</PaddedListItem>
-                        <PaddedListItem>Writing a custom Babel plugin</PaddedListItem>
-                        <PaddedListItem>ASTs at Domino's</PaddedListItem>
-                    </List>
+                    <AgendaSlideContent focusedIndex={2} />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <SlideTitle textColor="primary" size={4}>
+                        Tools
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0" padded={true}>
+                            <StyledLink
+                                href="https://resources.jointjs.com/demos/rappid/apps/Ast/index.html"
+                                padding="1rem"
+                                target="_blank"
+                            >
+                                <Image src={images.astVisualizer.replace("/", "")} />
+                                <Text margin="1rem 0 0 0" textFont="secondary">
+                                    AST Visualizer
+                                </Text>
+                            </StyledLink>
+                        </FlexFill>
+                        <FlexFill margin="1rem 0 0 0" padded={true}>
+                            <StyledLink
+                                href="http://astexplorer.net/#/gist/c6163b9a30912351982ac21c6b73cfb1/4a0b1278a03c6ef69bec27c18f2bdc68684b1245"
+                                padding="1rem"
+                                target="_blank"
+                            >
+                                <Image src={images.astExplorer.replace("/", "")} />
+                                <Text margin="1rem 0 0 0" textFont="secondary">
+                                    AST Explorer
+                                </Text>
+                            </StyledLink>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0" padded={true}>
+                            <Image width="720px" src={images.visitor.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0" padded={true}>
+                            <Image width="720px" src={images.add2Func.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console1.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast1.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console1.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast2.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console2.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast3.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console3.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast4.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console3.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast5.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console3.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast6.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console4.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast7.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console5.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Visitor Pattern
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Working with ASTs?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.add2Ast8.replace("/", "")} width="450px" />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start">
+                            <Image src={images.visitor.replace("/", "")} width="500px" />
+                            <Image src={images.console5.replace("/", "")} width="500px" />
+                        </FlexFill>
+                    </Layout>
                 </Slide>
             </Deck>
         );
