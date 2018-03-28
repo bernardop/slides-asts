@@ -3,7 +3,20 @@ import React from "react";
 import styled from "react-emotion";
 
 // Import Spectacle Core tags
-import { Appear, Deck, Heading, Image, Link, List, ListItem, Slide, Text, Layout, Fill } from "spectacle";
+import {
+    Appear,
+    Deck,
+    Heading,
+    Image,
+    Link,
+    List,
+    ListItem,
+    Notes,
+    Slide,
+    Text,
+    Layout,
+    Fill
+} from "spectacle";
 
 import preloader from "spectacle/lib/utils/preloader";
 
@@ -55,7 +68,10 @@ const images = {
     console2: require("./images/console2.png"),
     console3: require("./images/console3.png"),
     console4: require("./images/console4.png"),
-    console5: require("./images/console5.png")
+    console5: require("./images/console5.png"),
+    pathsNode: require("./images/paths-node.png"),
+    pathsPath: require("./images/paths-path.png"),
+    pathsMeta: require("./images/paths-meta.png")
 };
 
 preloader(images);
@@ -148,6 +164,11 @@ const StyledLink = styled(Link)`
     padding: ${props => props.padding || "0"};
 `;
 
+const StyledListItem = styled(ListItem)`
+    list-style-position: outside;
+    margin: 0.5rem 0;
+`;
+
 class AgendaSlideContent extends React.Component {
     render() {
         const { focusedIndex } = this.props;
@@ -167,9 +188,9 @@ class AgendaSlideContent extends React.Component {
                     {agendaItems.map(
                         (agendaItem, index) =>
                             focusedIndex === index ? (
-                                <FocusedListItem>{agendaItem}</FocusedListItem>
+                                <FocusedListItem key={index}>{agendaItem}</FocusedListItem>
                             ) : (
-                                <PaddedListItem>{agendaItem}</PaddedListItem>
+                                <PaddedListItem key={index}>{agendaItem}</PaddedListItem>
                             )
                     )}
                 </ListSansBullets>
@@ -215,7 +236,7 @@ class LogosSlideContent extends React.Component {
 export default class Presentation extends React.Component {
     render() {
         return (
-            <Deck contentWidth={1100} transitionDuration={500} theme={theme} progress="pacman">
+            <Deck contentWidth={1100} transitionDuration={500} theme={theme} progress="none">
                 <Slide bgColor="secondary" progressColor="primary">
                     <Heading size={3} lineHeight={1} textColor="primary">
                         ASTronomically Improving Your Developer Experience
@@ -268,6 +289,11 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <Notes>
+                        <ol>
+                            <li>Babel stuff</li>
+                        </ol>
+                    </Notes>
                     <LogosSlideContent />
                 </Slide>
 
@@ -458,7 +484,10 @@ export default class Presentation extends React.Component {
                     </SlideTitleSecondary>
                     <Layout>
                         <FlexFill margin="1rem 0 0 0" height="500px" overflow="auto" vAlign="flex-start">
-                            <Link href="https://github.com/estree/estree" target="_blank">
+                            <Link
+                                href="https://github.com/estree/estree/blob/master/es5.md#node-objects"
+                                target="_blank"
+                            >
                                 <StyledImage src={images.astJsonTypes.replace("/", "")} width="750px" />
                             </Link>
                         </FlexFill>
@@ -698,6 +727,164 @@ export default class Presentation extends React.Component {
                             <Image src={images.console5.replace("/", "")} width="500px" />
                         </FlexFill>
                     </Layout>
+                </Slide>
+
+                <Slide bgColor="primary" transition={["slide"]}>
+                    <AgendaSlideContent focusedIndex={3} />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["slide"]}>
+                    <SlideTitle textColor="primary" fit>
+                        Writing a custom ESLint rule
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill margin="3rem 0 0 0">
+                            <StyledLink
+                                href="http://astexplorer.net/#/gist/79e64f9274c055428a14c1916edc590b/5c5bca9c0fec1fb71c3f2868c35169385e1398d0"
+                                target="_blank"
+                                padding="1rem"
+                            >
+                                <Image width="200px" src={images.eslint.replace("/", "")} />
+                                <Text margin="1rem 0 0 0" textFont="secondary">
+                                    Setup
+                                </Text>
+                            </StyledLink>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0 0 0">
+                            <StyledLink
+                                href="http://astexplorer.net/#/gist/f6e8183ce27363ba2c90d94111cd6ef7/ad9e844d49b156b9876e529b7089b8217cca1567"
+                                target="_blank"
+                                padding="1rem"
+                            >
+                                <Image width="200px" src={images.eslint.replace("/", "")} />
+                                <Text margin="1rem 0 0 0" textFont="secondary">
+                                    Complete
+                                </Text>
+                            </StyledLink>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="primary" transition={["zoom"]}>
+                    <AgendaSlideContent focusedIndex={4} />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["zoom"]}>
+                    <SlideTitle textColor="primary" size={4}>
+                        Paths
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        Writing a custom Babel plugin
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0" vAlign="flex-start">
+                            <div>
+                                <Image src={images.pathsNode.replace("/", "")} width="400px" />
+                                <Text textFont="secondary">Node</Text>
+                            </div>
+                            <Appear>
+                                <div>
+                                    <Image src={images.pathsPath.replace("/", "")} width="400px" />
+                                    <Text margin="0.25rem 0 0 0" textFont="secondary">
+                                        Path
+                                    </Text>
+                                </div>
+                            </Appear>
+                        </FlexFill>
+                        <FlexFill>
+                            <Appear>
+                                <div>
+                                    <Image src={images.pathsMeta.replace("/", "")} width="400px" />
+                                    <Text margin="0.25rem 0 0 0" textFont="secondary">
+                                        Path + metadata
+                                    </Text>
+                                </div>
+                            </Appear>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["zoom"]}>
+                    <SlideTitle textColor="primary" fit>
+                        Writing a custom Babel plugin
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill margin="3rem 0 0 0">
+                            <StyledLink
+                                href="http://astexplorer.net/#/gist/de02c56dbb8eec0a1fdff1c8e096a1fa/0a5e3cc01a9bdef5c5e20607082a749daed1d4de"
+                                target="_blank"
+                                padding="1rem"
+                            >
+                                <Image width="250px" src={images.babel.replace("/", "")} />
+                                <Text margin="1rem 0 0 0" textFont="secondary">
+                                    Setup
+                                </Text>
+                            </StyledLink>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0 0 0">
+                            <StyledLink
+                                href="http://astexplorer.net/#/gist/9605f50f95e73c967de3fe1ee9bb123e/bccc09c3c3a70ba3b54901c95b9adaea659287c8"
+                                target="_blank"
+                                padding="1rem"
+                            >
+                                <Image width="250px" src={images.babel.replace("/", "")} />
+                                <Text margin="1rem 0 0 0" textFont="secondary">
+                                    Complete
+                                </Text>
+                            </StyledLink>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide textFont="secondary" bgColor="secondary" progressColor="primary" transition={["zoom"]}>
+                    <SlideTitle textColor="primary">Resources</SlideTitle>
+                    <List ordered={true} type="1">
+                        <StyledListItem>
+                            <Link href="http://astexplorer.net/" target="_blank">
+                                🛠 AST Explorer
+                            </Link>
+                        </StyledListItem>
+                        <StyledListItem>
+                            <Link
+                                href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md"
+                                target="_blank"
+                            >
+                                📓 Babel Plugin Handbook
+                            </Link>
+                        </StyledListItem>
+                        <StyledListItem>
+                            <Link href="https://github.com/estree/estree" target="_blank">
+                                📓 The ESTree Spec
+                            </Link>
+                        </StyledListItem>
+                        <StyledListItem>
+                            <Link href="https://www.youtube.com/watch?v=LRKlqR6KY_E" target="_blank">
+                                📺 As simple as an AST by Pavithra Kodmad
+                            </Link>
+                        </StyledListItem>
+                        <StyledListItem>
+                            <Link href="https://www.youtube.com/watch?v=VBscbcm2Mok" target="_blank">
+                                📺 Writing custom Babel and ESLint plugins with ASTs by Kent C. Dodds
+                            </Link>
+                        </StyledListItem>
+                        <StyledListItem>
+                            <Link
+                                href="https://resources.jointjs.com/demos/rappid/apps/Ast/index.html"
+                                target="_blank"
+                            >
+                                🛠 AST Visualizer
+                            </Link>
+                        </StyledListItem>
+                    </List>
+                </Slide>
+
+                <Slide bgColor="primary" transition={["zoom"]}>
+                    <Heading size={1} textColor="secondary">
+                        THANK YOU!
+                    </Heading>
+                    <Heading size={1} textColor="secondary" margin="3rem 0 0 0">
+                        👍
+                    </Heading>
                 </Slide>
             </Deck>
         );
