@@ -874,7 +874,7 @@ export default class Presentation extends React.Component {
                     <Layout>
                         <FlexFill margin="3rem 0 0 0">
                             <StyledLink
-                                href="http://astexplorer.net/#/gist/79e64f9274c055428a14c1916edc590b/5c5bca9c0fec1fb71c3f2868c35169385e1398d0"
+                                href="http://astexplorer.net/#/gist/79e64f9274c055428a14c1916edc590b/61b5cad748ed099e1e3bc999e8f35a0a4b33a578"
                                 target="_blank"
                                 padding="1rem"
                             >
