@@ -44,6 +44,7 @@ const images = {
     githubBabelCodemod: require("./images/github-babel-codemod.png"),
     sourceCodeIcon: require("./images/source-code.png"),
     arrowRight: require("./images/arrow-right.jpg"),
+    tokens: require("./images/tokens.png"),
     ast: require("./images/ast.svg"),
     astCode: require("./images/ast-code.png"),
     astJson: require("./images/ast-json.png"),
@@ -177,8 +178,8 @@ class AgendaSlideContent extends React.Component {
             "What is an AST?",
             "Working with ASTs",
             "Writing a custom ESLint rule",
-            "Writing a custom Babel plugin",
-            "ASTs at Domino's"
+            "Writing a custom Babel plugin"
+            // "ASTs at Domino's"
         ];
 
         return (
@@ -236,7 +237,7 @@ class LogosSlideContent extends React.Component {
 export default class Presentation extends React.Component {
     render() {
         return (
-            <Deck contentWidth={1100} transitionDuration={500} theme={theme} progress="none">
+            <Deck contentWidth={1100} transitionDuration={500} theme={theme} progress="bar" controls={false}>
                 <Slide bgColor="secondary" progressColor="primary">
                     <Heading size={3} lineHeight={1} textColor="primary">
                         ASTronomically Improving Your Developer Experience
@@ -269,7 +270,7 @@ export default class Presentation extends React.Component {
                         <AppearingListItem>Working with ASTs?</AppearingListItem>
                         <AppearingListItem>Writing a custom ESLint rule</AppearingListItem>
                         <AppearingListItem>Writing a custom Babel plugin</AppearingListItem>
-                        <AppearingListItem>ASTs at Domino's</AppearingListItem>
+                        {/* <AppearingListItem>ASTs at Domino's</AppearingListItem> */}
                     </ListSansBullets>
                 </Slide>
 
@@ -284,40 +285,90 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <Notes>
+                        <ul>
+                            <li>Superpowers</li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary">Why learn ASTs?</SlideTitle>
                     <Image src={images.brianFordTweet.replace("/", "")} padding="50px 0" />
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <Notes>
-                        <ol>
-                            <li>Babel stuff</li>
-                        </ol>
+                        <ul>
+                            <li>Better understand these tools</li>
+                            <li>Extend some of them</li>
+                        </ul>
                     </Notes>
                     <LogosSlideContent />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>ESLint</h1>
+                        <ul>
+                            <li>
+                                Static analysis
+                                <ul>
+                                    <li>Find problematic patterns</li>
+                                    <li>Adhere to certain guidelines</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </Notes>
                     <LogosSlideContent highlightedIndex={0} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Babel</h1>
+                        <ul>
+                            <li>Compile newer JS features down to a supported version</li>
+                        </ul>
+                    </Notes>
                     <LogosSlideContent highlightedIndex={1} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Webpack</h1>
+                        <ul>
+                            <li>Performs static analysis on the AST to support any type of module</li>
+                            <li>Version 4 - possible to pass AST directly from loader to webpack</li>
+                        </ul>
+                    </Notes>
                     <LogosSlideContent highlightedIndex={2} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Uglify</h1>
+                        <ul>
+                            <li>Scope analysis</li>
+                        </ul>
+                    </Notes>
                     <LogosSlideContent highlightedIndex={3} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Prettier</h1>
+                        <ul>
+                            <li>Uses AST to pretty print</li>
+                            <li>Location?</li>
+                        </ul>
+                    </Notes>
                     <LogosSlideContent highlightedIndex={4} />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>JSCodeshift</h1>
+                        <ul>
+                            <li>Write transformations that operate on multiple files</li>
+                        </ul>
+                    </Notes>
                     <LogosSlideContent highlightedIndex={5} />
                 </Slide>
 
@@ -331,11 +382,11 @@ export default class Presentation extends React.Component {
                     <Layout>
                         <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
                             <Text textFont="secondary">In</Text>
-                            <Image src={images.babelLodashIn.replace("/", "")} height="200px" />
+                            <Image src={images.babelLodashIn.replace("/", "")} width="500px" />
                         </FlexFill>
                         <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
                             <Text textFont="secondary">Out</Text>
-                            <Image src={images.babelLodashOut.replace("/", "")} height="220px" />
+                            <Image src={images.babelLodashOut.replace("/", "")} width="500px" />
                         </FlexFill>
                     </Layout>
                 </Slide>
@@ -360,6 +411,13 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <Notes>
+                        <h1>Other ESLint plugins</h1>
+                        <ul>
+                            <li>eslint-plugin-import</li>
+                            <li>eslint-plugin-react</li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         eslint-plugin-jsx-a11y
                     </SlideTitle>
@@ -375,6 +433,26 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                    <Notes>
+                        <ul>
+                            <li>
+                                js-codemod
+                                <ul>
+                                    <li>
+                                        Convert <code>var</code> to <code>const</code> or <code>let</code>
+                                    </li>
+                                    <li>Transform object literals to use ES6 shorthand</li>
+                                </ul>
+                            </li>
+                            <li>
+                                react-codemod
+                                <ul>
+                                    <li>rename-unsafe-lifecycles</li>
+                                    <li>React-PropTypes-to-prop-types</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         Codemods
                     </SlideTitle>
@@ -432,6 +510,27 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <Notes>
+                        <h1>Tokenization</h1>
+                        <ul>
+                            <li>Minimum sequence of characters with meaning</li>
+                            <li>Grammar - valid way of combining tokens</li>
+                        </ul>
+                    </Notes>
+                    <SlideTitle textColor="primary" size={4}>
+                        Lexical Analysis
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0">
+                            <Image width="700px" src={images.tokens.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         Consider this code snippet...
                     </SlideTitle>
@@ -452,32 +551,40 @@ export default class Presentation extends React.Component {
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
                         What is an AST?
                     </SlideTitleSecondary>
-                    <ImageAbsolute
-                        top="30%"
-                        right="10%"
-                        height="150px"
-                        src={images.astCode.replace("/", "")}
-                    />
-                    <Image margin="3rem 0 0 10rem" height="400px" src={images.ast.replace("/", "")} />
+                    <Layout>
+                        <FlexFill hAlign="flex-start" margin="1rem 0 0 0">
+                            <StyledImage width="700px" src={images.ast.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill vAlign="flex-start" margin="1rem 0 0 0">
+                            <Image margin="0" width="500px" src={images.astCode.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <Notes>
+                        <ul>
+                            <li>Deeply nested object</li>
+                            <li>Code representation that is simpler to work with</li>
+                            <li>Gives us a lot of information</li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
-                        JSON representation
+                        This is it
                     </SlideTitle>
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
                         What is an AST?
                     </SlideTitleSecondary>
                     <Layout>
                         <FlexFill margin="1rem 0 0 0" height="500px" overflow="auto" vAlign="flex-start">
-                            <StyledImage src={images.astJson.replace("/", "")} width="750px" />
+                            <StyledImage margin="0" src={images.astJson.replace("/", "")} width="750px" />
                         </FlexFill>
                     </Layout>
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
-                        JSON representation
+                        ESTree Spec
                     </SlideTitle>
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
                         What is an AST?
@@ -488,7 +595,11 @@ export default class Presentation extends React.Component {
                                 href="https://github.com/estree/estree/blob/master/es5.md#node-objects"
                                 target="_blank"
                             >
-                                <StyledImage src={images.astJsonTypes.replace("/", "")} width="750px" />
+                                <StyledImage
+                                    margin="0"
+                                    src={images.astJsonTypes.replace("/", "")}
+                                    width="750px"
+                                />
                             </Link>
                         </FlexFill>
                     </Layout>
@@ -505,6 +616,13 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <Notes>
+                        <ul>
+                            <li>
+                                If you only remember one thing about this talk, remember <b>AST Explorer</b>
+                            </li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         Tools
                     </SlideTitle>
@@ -526,7 +644,7 @@ export default class Presentation extends React.Component {
                         </FlexFill>
                         <FlexFill margin="1rem 0 0 0" padded={true}>
                             <StyledLink
-                                href="http://astexplorer.net/#/gist/c6163b9a30912351982ac21c6b73cfb1/4a0b1278a03c6ef69bec27c18f2bdc68684b1245"
+                                href="http://astexplorer.net/#/gist/3049fc1cd012ab51a2f43a0ed0ee5d34/b7205224f9342539d8cfd2df14ea536e34b671ce"
                                 padding="1rem"
                                 target="_blank"
                             >
@@ -540,6 +658,12 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <Notes>
+                        <ul>
+                            <li>Pattern used in AST traversal across languages</li>
+                            <li>Object with methods defined for accepting particular node types</li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         Visitor Pattern
                     </SlideTitle>
@@ -554,6 +678,11 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <Notes>
+                        <ul>
+                            <li>Example</li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         Visitor Pattern
                     </SlideTitle>
@@ -712,6 +841,11 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <ul>
+                            <li>Both ESLint and Babel use this pattern</li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         Visitor Pattern
                     </SlideTitle>
@@ -770,6 +904,16 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary" transition={["zoom"]}>
+                    <Notes>
+                        <h1>Paths</h1>
+                        <ul>
+                            <li>Object representation of the link between two nodes</li>
+                            <li>
+                                As well as tons and tons of methods related to adding, updating, moving, and
+                                removing nodes
+                            </li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         Paths
                     </SlideTitle>
@@ -841,7 +985,10 @@ export default class Presentation extends React.Component {
                     <List ordered={true} type="1">
                         <StyledListItem>
                             <Link href="http://astexplorer.net/" target="_blank">
-                                🛠 AST Explorer
+                                <span role="img" aria-label="tools">
+                                    🛠
+                                </span>{" "}
+                                AST Explorer
                             </Link>
                         </StyledListItem>
                         <StyledListItem>
@@ -849,22 +996,34 @@ export default class Presentation extends React.Component {
                                 href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md"
                                 target="_blank"
                             >
-                                📓 Babel Plugin Handbook
+                                <span role="img" aria-label="notebook">
+                                    📓
+                                </span>{" "}
+                                Babel Plugin Handbook
                             </Link>
                         </StyledListItem>
                         <StyledListItem>
                             <Link href="https://github.com/estree/estree" target="_blank">
-                                📓 The ESTree Spec
+                                <span role="img" aria-label="notebook">
+                                    📓
+                                </span>{" "}
+                                The ESTree Spec
                             </Link>
                         </StyledListItem>
                         <StyledListItem>
                             <Link href="https://www.youtube.com/watch?v=LRKlqR6KY_E" target="_blank">
-                                📺 As simple as an AST by Pavithra Kodmad
+                                <span role="img" aria-label="tv">
+                                    📺
+                                </span>{" "}
+                                As simple as an AST by Pavithra Kodmad
                             </Link>
                         </StyledListItem>
                         <StyledListItem>
                             <Link href="https://www.youtube.com/watch?v=VBscbcm2Mok" target="_blank">
-                                📺 Writing custom Babel and ESLint plugins with ASTs by Kent C. Dodds
+                                <span role="img" aria-label="tv">
+                                    📺
+                                </span>{" "}
+                                Writing custom Babel and ESLint plugins with ASTs by Kent C. Dodds
                             </Link>
                         </StyledListItem>
                         <StyledListItem>
@@ -872,7 +1031,10 @@ export default class Presentation extends React.Component {
                                 href="https://resources.jointjs.com/demos/rappid/apps/Ast/index.html"
                                 target="_blank"
                             >
-                                🛠 AST Visualizer
+                                <span role="img" aria-label="tools">
+                                    🛠
+                                </span>{" "}
+                                AST Visualizer
                             </Link>
                         </StyledListItem>
                     </List>
@@ -883,7 +1045,9 @@ export default class Presentation extends React.Component {
                         THANK YOU!
                     </Heading>
                     <Heading size={1} textColor="secondary" margin="3rem 0 0 0">
-                        👍
+                        <span role="img" aria-label="thumbs up">
+                            👍
+                        </span>
                     </Heading>
                 </Slide>
             </Deck>
