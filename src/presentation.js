@@ -90,6 +90,14 @@ const theme = createTheme(
     }
 );
 
+const StyledHeading = styled(Heading)`
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: #0c648f;
+    border-style: double;
+    border-width: 20px 0;
+    padding: 0.5rem;
+`;
+
 const SlideTitle = ({ children, textColor, fit, padding, size }) => (
     <Heading size={size || 3} fit={fit} caps textColor={textColor} padding={padding}>
         {children}
@@ -148,14 +156,6 @@ const FlexFill = styled(Fill)`
     padding: ${props => (props.padded ? "1rem" : "0")};
 `;
 
-const ImageAbsolute = styled(Image)`
-    bottom: ${props => props.bottom || "auto"};
-    left: ${props => props.left || "auto"};
-    position: absolute;
-    right: ${props => props.right || "auto"};
-    top: ${props => props.top || "auto"};
-`;
-
 const BoxedText = styled(Text)`
     border: 1px solid #333;
 `;
@@ -184,7 +184,9 @@ class AgendaSlideContent extends React.Component {
 
         return (
             <React.Fragment>
-                <SlideTitle textColor="tertiary">Agenda</SlideTitle>
+                <StyledHeading caps size={3} textColor="tertiary">
+                    Agenda
+                </StyledHeading>
                 <ListSansBullets color="secondary" textFont="secondary">
                     {agendaItems.map(
                         (agendaItem, index) =>
@@ -263,7 +265,9 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="primary" transition={["zoom"]}>
-                    <SlideTitle textColor="tertiary">Agenda</SlideTitle>
+                    <StyledHeading caps size={3} textColor="tertiary">
+                        Agenda
+                    </StyledHeading>
                     <ListSansBullets color="secondary" textFont="secondary">
                         <AppearingListItem>Why learn ASTs?</AppearingListItem>
                         <AppearingListItem>What is an AST?</AppearingListItem>
