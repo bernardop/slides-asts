@@ -1,6 +1,7 @@
 // Import React
 import React from "react";
 import styled from "react-emotion";
+import { SocialIcon } from "react-social-icons";
 
 // Import Spectacle Core tags
 import {
@@ -28,6 +29,7 @@ require("normalize.css");
 
 const images = {
     dpzLogo: require("./images/dpz-logo.png"),
+    fam: require("./images/fam.jpg"),
     brianFordTweet: require("./images/briantford_status.png"),
     eslint: require("./images/eslint.svg"),
     babel: require("./images/babel-10.svg"),
@@ -98,7 +100,7 @@ const StyledHeading = styled(Heading)`
     padding: 0.5rem;
 `;
 
-const SlideTitle = ({ children, textColor, fit, padding, size }) => (
+const SlideTitle = ({ caps, children, textColor, fit, padding, size }) => (
     <Heading size={size || 3} fit={fit} caps textColor={textColor} padding={padding}>
         {children}
     </Heading>
@@ -178,8 +180,8 @@ class AgendaSlideContent extends React.Component {
             "What is an AST?",
             "Working with ASTs",
             "Writing a custom ESLint rule",
-            "Writing a custom Babel plugin"
-            // "ASTs at Domino's"
+            "Writing a custom Babel plugin",
+            "ASTs at Domino's"
         ];
 
         return (
@@ -239,28 +241,33 @@ class LogosSlideContent extends React.Component {
 export default class Presentation extends React.Component {
     render() {
         return (
-            <Deck contentWidth={1100} transitionDuration={500} theme={theme} progress="bar" controls={false}>
+            <Deck transitionDuration={500} theme={theme} progress="bar" controls={false}>
                 <Slide bgColor="secondary" progressColor="primary">
-                    <Heading size={3} lineHeight={1} textColor="primary">
+                    <Heading size={4} lineHeight={1} textColor="primary">
                         ASTronomically Improving Your Developer Experience
                     </Heading>
-                    <Heading size={4} fit lineHeight={1} textColor="tertiary">
+                    <Heading size={5} fit lineHeight={1} textColor="tertiary">
                         (A JS Abstract Syntax Trees Primer)
                     </Heading>
-                    <Text margin="100px 0 0" textAlign="right" textColor="quaternary" textFont="secondary">
+                    <Text margin="200px 0 0" textAlign="right" textColor="quaternary" textFont="secondary">
                         Bernardo Pacheco
                     </Text>
                     <Text textAlign="right" textColor="quaternary" textFont="secondary">
+                        <SocialIcon color="#0c648f" url="https://github.com/bernardop" />{" "}
+                        <SocialIcon color="#0c648f" url="https://twitter.com/bernardop" /> bernardop
+                    </Text>
+                </Slide>
+
+                <Slide bgColor="secondary" transition={["zoom"]}>
+                    <Image height={600} src={images.fam.replace("/", "")} />
+                    <Text textColor="quaternary" textFont="secondary">
                         <Image
                             src={images.dpzLogo.replace("/", "")}
                             height="40px"
-                            margin="0"
+                            margin="1rem 0 0 0"
                             display="inline"
                         />{" "}
                         Front-End Developer
-                    </Text>
-                    <Text textAlign="right" textColor="quaternary" textFont="secondary">
-                        @bernardop
                     </Text>
                 </Slide>
 
@@ -274,7 +281,7 @@ export default class Presentation extends React.Component {
                         <AppearingListItem>Working with ASTs?</AppearingListItem>
                         <AppearingListItem>Writing a custom ESLint rule</AppearingListItem>
                         <AppearingListItem>Writing a custom Babel plugin</AppearingListItem>
-                        {/* <AppearingListItem>ASTs at Domino's</AppearingListItem> */}
+                        <AppearingListItem>ASTs at Domino's</AppearingListItem>
                     </ListSansBullets>
                 </Slide>
 
@@ -283,8 +290,8 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
-                    <SlideTitle fit textColor="primary">
-                        Cue obligatory tweet about subject...
+                    <SlideTitle textColor="primary" size={4}>
+                        Cue tweet about ASTs...
                     </SlideTitle>
                 </Slide>
 
@@ -386,11 +393,11 @@ export default class Presentation extends React.Component {
                     <Layout>
                         <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
                             <Text textFont="secondary">In</Text>
-                            <Image src={images.babelLodashIn.replace("/", "")} width="500px" />
+                            <Image src={images.babelLodashIn.replace("/", "")} />
                         </FlexFill>
                         <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
                             <Text textFont="secondary">Out</Text>
-                            <Image src={images.babelLodashOut.replace("/", "")} width="500px" />
+                            <Image src={images.babelLodashOut.replace("/", "")} />
                         </FlexFill>
                     </Layout>
                 </Slide>
@@ -429,9 +436,9 @@ export default class Presentation extends React.Component {
                         Why learn ASTs?
                     </SlideTitleSecondary>
                     <Layout>
-                        <FlexFill margin="3rem 0.5rem">
-                            <Image height="200px" src={images.eslintEmoji.replace("/", "")} />
-                            <Image height="200px" src={images.eslintAnchor.replace("/", "")} />
+                        <FlexFill margin="1rem 0.5rem">
+                            <Image width="70%" src={images.eslintEmoji.replace("/", "")} />
+                            <Image width="70%" src={images.eslintAnchor.replace("/", "")} />
                         </FlexFill>
                     </Layout>
                 </Slide>
@@ -464,9 +471,9 @@ export default class Presentation extends React.Component {
                         Why learn ASTs?
                     </SlideTitleSecondary>
                     <Layout>
-                        <FlexFill margin="3rem 0 0 0">
-                            <Image width="500px" src={images.githubBabelCodemod.replace("/", "")} />
-                            <Image width="500px" src={images.githubJSCodeshift.replace("/", "")} />
+                        <FlexFill margin="1rem 0 0 0">
+                            <Image width="70%" src={images.githubBabelCodemod.replace("/", "")} />
+                            <Image width="70%" src={images.githubJSCodeshift.replace("/", "")} />
                         </FlexFill>
                     </Layout>
                 </Slide>
