@@ -92,7 +92,7 @@ const theme = createTheme(
     }
 );
 
-const StyledHeading = styled(Heading)`
+const AgendaHeading = styled(Heading)`
     background-color: rgba(255, 255, 255, 0.9);
     border-color: #0c648f;
     border-style: double;
@@ -100,10 +100,15 @@ const StyledHeading = styled(Heading)`
     padding: 0.5rem;
 `;
 
-const SlideTitle = ({ caps, children, textColor, fit, padding, size }) => (
-    <Heading size={size || 3} fit={fit} caps textColor={textColor} padding={padding}>
+const CustomHeading = styled(Heading)`
+    position: ${props => (props.zIndex ? "relative" : "static")};
+    z-index: ${props => props.zIndex || "auto"};
+`;
+
+const SlideTitle = ({ caps, children, textColor, fit, padding, size, zIndex }) => (
+    <CustomHeading size={size || 3} fit={fit} caps textColor={textColor} padding={padding} zIndex={zIndex}>
         {children}
-    </Heading>
+    </CustomHeading>
 );
 
 const SlideTitleSecondary = styled(Heading)`
@@ -112,6 +117,7 @@ const SlideTitleSecondary = styled(Heading)`
     text-transform: uppercase;
     top: 0;
     width: 92%;
+    z-index: ${props => props.zIndex || "auto"};
 `;
 
 const ListSansBullets = styled(List)`
@@ -143,6 +149,7 @@ const LogoImage = styled(Image)`
 
 const StyledImage = styled(Image)`
     max-height: none !important;
+    width: ${props => props.width || "auto"};
 `;
 
 const FlexFill = styled(Fill)`
@@ -156,6 +163,7 @@ const FlexFill = styled(Fill)`
     margin: ${props => props.margin || "0 0 3rem 0"};
     overflow: ${props => props.overflow || "visible"};
     padding: ${props => (props.padded ? "1rem" : "0")};
+    z-index: ${props => props.zIndex || "auto"};
 `;
 
 const BoxedText = styled(Text)`
@@ -172,6 +180,28 @@ const StyledListItem = styled(ListItem)`
     margin: 0.5rem 0;
 `;
 
+const Overlay = styled("div")`
+    background: rgba(255, 255, 255, 0.9);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+`;
+
+const AbsoluteContainer = styled("div")`
+    align-items: ${props => props.alignItems || "center"};
+    bottom: ${props => props.bottom || "auto"};
+    display: flex;
+    flex-direction: ${props => props.flexDirection || "row"};
+    left: ${props => props.left || "auto"};
+    padding: ${props => props.padding || "0"};
+    position: absolute;
+    right: ${props => props.right || "auto"};
+    top: ${props => props.top || "auto"};
+    z-index: 100;
+`;
+
 class AgendaSlideContent extends React.Component {
     render() {
         const { focusedIndex } = this.props;
@@ -186,9 +216,9 @@ class AgendaSlideContent extends React.Component {
 
         return (
             <React.Fragment>
-                <StyledHeading caps size={3} textColor="tertiary">
+                <AgendaHeading caps size={3} textColor="tertiary">
                     Agenda
-                </StyledHeading>
+                </AgendaHeading>
                 <ListSansBullets color="secondary" textFont="secondary">
                     {agendaItems.map(
                         (agendaItem, index) =>
@@ -205,33 +235,106 @@ class AgendaSlideContent extends React.Component {
 }
 
 class LogosSlideContent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            topRow: [],
+            bottomRow: []
+        };
+    }
+
+    static getDerivedStateFromProps(nextProps) {
+        return {
+            topRow: [
+                {
+                    type: "image",
+                    imageName: "eslint",
+                    highlighted: nextProps.highlightedIndex === 0,
+                    zIndex: nextProps.highlightedIndex === 0 ? "100" : "0"
+                },
+                {
+                    type: "image",
+                    imageName: "babel",
+                    highlighted: nextProps.highlightedIndex === 1,
+                    zIndex: nextProps.highlightedIndex === 1 ? "100" : "0"
+                },
+                {
+                    type: "image",
+                    imageName: "webpack",
+                    highlighted: nextProps.highlightedIndex === 2,
+                    zIndex: nextProps.highlightedIndex === 2 ? "100" : "0"
+                }
+            ],
+            bottomRow: [
+                {
+                    type: "image",
+                    imageName: "uglify",
+                    highlighted: nextProps.highlightedIndex === 3,
+                    zIndex: nextProps.highlightedIndex === 3 ? "100" : "0"
+                },
+                {
+                    type: "image",
+                    imageName: "prettier",
+                    highlighted: nextProps.highlightedIndex === 4,
+                    zIndex: nextProps.highlightedIndex === 4 ? "100" : "0"
+                },
+                {
+                    type: "text",
+                    text: "JSCodeshift",
+                    highlighted: nextProps.highlightedIndex === 5,
+                    zIndex: nextProps.highlightedIndex === 5 ? "100" : "0"
+                }
+            ]
+        };
+    }
+
     render() {
         return (
             <React.Fragment>
-                <SlideTitle textColor="primary" padding="0 0 50px 0">
-                    Why learn ASTs?
-                </SlideTitle>
+                {this.props.title ? (
+                    <SlideTitle textColor="primary" size={4} zIndex="100">
+                        {this.props.title}
+                    </SlideTitle>
+                ) : null}
+                {this.props.subtitle ? (
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="2rem" zIndex="100">
+                        {this.props.subtitle}
+                    </SlideTitleSecondary>
+                ) : null}
                 <Layout>
-                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 0}>
-                        <LogoImage src={images.eslint.replace("/", "")} />
-                    </FlexFill>
-                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 1}>
-                        <LogoImage src={images.babel.replace("/", "")} />
-                    </FlexFill>
-                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 2}>
-                        <LogoImage src={images.webpack.replace("/", "")} />
-                    </FlexFill>
+                    {this.state.topRow.map((item, index) => (
+                        <FlexFill
+                            key={index}
+                            padded={true}
+                            highlight={item.highlighted}
+                            margin="3rem 0 0 0"
+                            zIndex={item.zIndex}
+                        >
+                            {item.type === "image" ? (
+                                <LogoImage src={images[item.imageName].replace("/", "")} />
+                            ) : (
+                                <Text>{item.text}</Text>
+                            )}
+                        </FlexFill>
+                    ))}
                 </Layout>
                 <Layout>
-                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 3}>
-                        <LogoImage src={images.uglify.replace("/", "")} />
-                    </FlexFill>
-                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 4}>
-                        <LogoImage src={images.prettier.replace("/", "")} />
-                    </FlexFill>
-                    <FlexFill padded={true} highlight={this.props.highlightedIndex === 5}>
-                        <Text>JSCodeshift</Text>
-                    </FlexFill>
+                    {this.state.bottomRow.map((item, index) => (
+                        <FlexFill
+                            key={index}
+                            padded={true}
+                            highlight={item.highlighted}
+                            margin="1rem 0 0 0"
+                            zIndex={item.zIndex}
+                        >
+                            {item.type === "image" ? (
+                                <LogoImage src={images[item.imageName].replace("/", "")} />
+                            ) : (
+                                <Text>{item.text}</Text>
+                            )}
+                        </FlexFill>
+                    ))}
                 </Layout>
             </React.Fragment>
         );
@@ -249,7 +352,7 @@ export default class Presentation extends React.Component {
                     <Heading size={5} fit lineHeight={1} textColor="tertiary">
                         (A JS Abstract Syntax Trees Primer)
                     </Heading>
-                    <Text margin="200px 0 0" textAlign="right" textColor="quaternary" textFont="secondary">
+                    <Text margin="5rem 0 0" textAlign="right" textColor="quaternary" textFont="secondary">
                         Bernardo Pacheco
                     </Text>
                     <Text textAlign="right" textColor="quaternary" textFont="secondary">
@@ -259,11 +362,11 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["zoom"]}>
-                    <Image height={600} src={images.fam.replace("/", "")} />
+                    <StyledImage src={images.fam.replace("/", "")} width="50%" />
                     <Text textColor="quaternary" textFont="secondary">
                         <Image
                             src={images.dpzLogo.replace("/", "")}
-                            height="40px"
+                            height="50px"
                             margin="1rem 0 0 0"
                             display="inline"
                         />{" "}
@@ -272,9 +375,9 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="primary" transition={["zoom"]}>
-                    <StyledHeading caps size={3} textColor="tertiary">
+                    <AgendaHeading caps size={3} textColor="tertiary">
                         Agenda
-                    </StyledHeading>
+                    </AgendaHeading>
                     <ListSansBullets color="secondary" textFont="secondary">
                         <AppearingListItem>Why learn ASTs?</AppearingListItem>
                         <AppearingListItem>What is an AST?</AppearingListItem>
@@ -305,14 +408,14 @@ export default class Presentation extends React.Component {
                     <Image src={images.brianFordTweet.replace("/", "")} padding="50px 0" />
                 </Slide>
 
-                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                <Slide bgColor="secondary" transitionIn={["slide"]} progressColor="primary">
                     <Notes>
                         <ul>
                             <li>Better understand these tools</li>
                             <li>Extend some of them</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent />
+                    <LogosSlideContent title="Why learn ASTs?" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
@@ -328,7 +431,34 @@ export default class Presentation extends React.Component {
                             </li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={0} />
+                    <LogosSlideContent highlightedIndex={0} title="Why learn ASTs?" />
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Other ESLint plugins</h1>
+                        <ul>
+                            <li>eslint-plugin-import</li>
+                            <li>eslint-plugin-react</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent
+                        highlightedIndex={0}
+                        title="eslint-plugin-jsx-a11y"
+                        subtitle="Why learn ASTs?"
+                    />
+                    <AbsoluteContainer
+                        alignItems="flex-end"
+                        flexDirection="column"
+                        padding="15% 1rem 0 0"
+                        top="0"
+                        right="0"
+                    >
+                        <Image width="60%" margin="0 0 1rem 0" src={images.eslintEmoji.replace("/", "")} />
+                        <Image width="60%" margin="0" src={images.eslintAnchor.replace("/", "")} />
+                    </AbsoluteContainer>
+                    <Overlay />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
@@ -338,49 +468,23 @@ export default class Presentation extends React.Component {
                             <li>Compile newer JS features down to a supported version</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={1} />
+                    <LogosSlideContent highlightedIndex={1} title="Why learn ASTs?" />
+                    <Overlay />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
                     <Notes>
-                        <h1>Webpack</h1>
+                        <h1>Babel</h1>
                         <ul>
-                            <li>Performs static analysis on the AST to support any type of module</li>
-                            <li>Version 4 - possible to pass AST directly from loader to webpack</li>
+                            <li>Compile newer JS features down to a supported version</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={2} />
-                </Slide>
-
-                <Slide bgColor="secondary" progressColor="primary">
-                    <Notes>
-                        <h1>Uglify</h1>
-                        <ul>
-                            <li>Scope analysis</li>
-                        </ul>
-                    </Notes>
-                    <LogosSlideContent highlightedIndex={3} />
-                </Slide>
-
-                <Slide bgColor="secondary" progressColor="primary">
-                    <Notes>
-                        <h1>Prettier</h1>
-                        <ul>
-                            <li>Uses AST to pretty print</li>
-                            <li>Location?</li>
-                        </ul>
-                    </Notes>
-                    <LogosSlideContent highlightedIndex={4} />
-                </Slide>
-
-                <Slide bgColor="secondary" progressColor="primary">
-                    <Notes>
-                        <h1>JSCodeshift</h1>
-                        <ul>
-                            <li>Write transformations that operate on multiple files</li>
-                        </ul>
-                    </Notes>
-                    <LogosSlideContent highlightedIndex={5} />
+                    <LogosSlideContent
+                        highlightedIndex={1}
+                        title="babel-plugin-lodash"
+                        subtitle="Why learn ASTs?"
+                    />
+                    <Overlay />
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
@@ -421,26 +525,50 @@ export default class Presentation extends React.Component {
                     </Layout>
                 </Slide>
 
-                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
+                <Slide bgColor="secondary" progressColor="primary">
                     <Notes>
-                        <h1>Other ESLint plugins</h1>
+                        <h1>Webpack</h1>
                         <ul>
-                            <li>eslint-plugin-import</li>
-                            <li>eslint-plugin-react</li>
+                            <li>Performs static analysis on the AST to support any type of module</li>
+                            <li>Version 4 - possible to pass AST directly from loader to webpack</li>
                         </ul>
                     </Notes>
-                    <SlideTitle textColor="primary" size={4}>
-                        eslint-plugin-jsx-a11y
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Why learn ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill margin="1rem 0.5rem">
-                            <Image width="70%" src={images.eslintEmoji.replace("/", "")} />
-                            <Image width="70%" src={images.eslintAnchor.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
+                    <LogosSlideContent highlightedIndex={2} />
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Uglify</h1>
+                        <ul>
+                            <li>Scope analysis</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={3} />
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Prettier</h1>
+                        <ul>
+                            <li>Uses AST to pretty print</li>
+                            <li>Location?</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={4} />
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>JSCodeshift</h1>
+                        <ul>
+                            <li>Write transformations that operate on multiple files</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={5} />
+                    <Overlay />
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
