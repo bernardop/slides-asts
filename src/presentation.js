@@ -194,6 +194,7 @@ const AbsoluteContainer = styled("div")`
     bottom: ${props => props.bottom || "auto"};
     display: flex;
     flex-direction: ${props => props.flexDirection || "row"};
+    justify-content: ${props => props.justifyContent || "flex-start"};
     left: ${props => props.left || "auto"};
     padding: ${props => props.padding || "0"};
     position: absolute;
@@ -293,7 +294,7 @@ class LogosSlideContent extends React.Component {
         return (
             <React.Fragment>
                 {this.props.title ? (
-                    <SlideTitle textColor="primary" size={4} zIndex="100">
+                    <SlideTitle textColor="primary" size={4} zIndex="100" fit={this.props.fitTitle}>
                         {this.props.title}
                     </SlideTitle>
                 ) : null}
@@ -308,7 +309,7 @@ class LogosSlideContent extends React.Component {
                             key={index}
                             padded={true}
                             highlight={item.highlighted}
-                            margin="3rem 0 0 0"
+                            margin="2rem 0 0 0"
                             zIndex={item.zIndex}
                         >
                             {item.type === "image" ? (
@@ -325,7 +326,7 @@ class LogosSlideContent extends React.Component {
                             key={index}
                             padded={true}
                             highlight={item.highlighted}
-                            margin="1rem 0 0 0"
+                            margin="4rem 0 0 0"
                             zIndex={item.zIndex}
                         >
                             {item.type === "image" ? (
@@ -473,56 +474,46 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <Notes>
-                        <h1>Babel</h1>
-                        <ul>
-                            <li>Compile newer JS features down to a supported version</li>
-                        </ul>
-                    </Notes>
                     <LogosSlideContent
                         highlightedIndex={1}
                         title="babel-plugin-lodash"
                         subtitle="Why learn ASTs?"
                     />
+                    <AbsoluteContainer alignItems="flex-start" flexDirection="row" padding="0" bottom="0">
+                        <Image padding="0 0.25rem" src={images.babelLodashIn.replace("/", "")} width="50%" />
+                        <Image padding="0 0.25rem" src={images.babelLodashOut.replace("/", "")} width="50%" />
+                    </AbsoluteContainer>
                     <Overlay />
                 </Slide>
 
-                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        babel-plugin-lodash
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="2rem">
-                        Why learn ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
-                            <Text textFont="secondary">In</Text>
-                            <Image src={images.babelLodashIn.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
-                            <Text textFont="secondary">Out</Text>
-                            <Image src={images.babelLodashOut.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
-                </Slide>
-
-                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
-                    <SlideTitle textColor="primary" size={4} fit padding="0 0 48px 0">
-                        @babel/plugin-proposal-optional-chaining
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Why learn ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
-                            <Text textFont="secondary">In</Text>
-                            <Image src={images.babelOptChainIn.replace("/", "")} />
-                        </FlexFill>
-                        <FlexFill margin="3rem 0.5rem" vAlign="flex-start">
-                            <Text textFont="secondary">Out</Text>
-                            <Image src={images.babelOptChainOut.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <LogosSlideContent
+                        highlightedIndex={1}
+                        title="@babel/plugin-proposal-optional-chaining"
+                        subtitle="Why learn ASTs?"
+                        fitTitle={true}
+                    />
+                    <AbsoluteContainer
+                        alignItems="flex-start"
+                        flexDirection="row"
+                        justifyContent="center"
+                        padding="0"
+                        bottom="-25px"
+                    >
+                        <Image
+                            margin="0"
+                            padding="0 0.25rem"
+                            src={images.babelOptChainIn.replace("/", "")}
+                            width="40%"
+                        />
+                        <Image
+                            margin="0"
+                            padding="0 0.25rem"
+                            src={images.babelOptChainOut.replace("/", "")}
+                            width="40%"
+                        />
+                    </AbsoluteContainer>
+                    <Overlay />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
@@ -533,7 +524,7 @@ export default class Presentation extends React.Component {
                             <li>Version 4 - possible to pass AST directly from loader to webpack</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={2} />
+                    <LogosSlideContent highlightedIndex={2} title="Why learn ASTs?" />
                     <Overlay />
                 </Slide>
 
@@ -544,7 +535,7 @@ export default class Presentation extends React.Component {
                             <li>Scope analysis</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={3} />
+                    <LogosSlideContent highlightedIndex={3} title="Why learn ASTs?" />
                     <Overlay />
                 </Slide>
 
@@ -556,7 +547,7 @@ export default class Presentation extends React.Component {
                             <li>Location?</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={4} />
+                    <LogosSlideContent highlightedIndex={4} title="Why learn ASTs?" />
                     <Overlay />
                 </Slide>
 
@@ -567,7 +558,7 @@ export default class Presentation extends React.Component {
                             <li>Write transformations that operate on multiple files</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={5} />
+                    <LogosSlideContent highlightedIndex={5} title="Why learn ASTs?" />
                     <Overlay />
                 </Slide>
 
