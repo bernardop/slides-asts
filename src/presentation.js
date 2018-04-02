@@ -35,7 +35,11 @@ const images = {
     babel: require("./images/babel-10.svg"),
     webpack: require("./images/webpack.svg"),
     prettier: require("./images/prettier.png"),
+    prettierIn: require("./images/prettier-in.png"),
+    prettierOut: require("./images/prettier-out.png"),
     uglify: require("./images/uglify.png"),
+    uglifyIn: require("./images/uglify-in.png"),
+    uglifyOut: require("./images/uglify-out.png"),
     babelLodashIn: require("./images/babel-plugin-lodash-in.png"),
     babelLodashOut: require("./images/babel-plugin-lodash-out.png"),
     babelOptChainIn: require("./images/babel-chaining-in.png"),
@@ -181,12 +185,12 @@ const StyledListItem = styled(ListItem)`
 `;
 
 const Overlay = styled("div")`
-    background: rgba(255, 255, 255, 0.9);
-    bottom: 0;
-    left: 0;
+    background: rgba(255, 255, 255, 0.95);
+    bottom: -50%;
+    left: -50%;
     position: fixed;
-    right: 0;
-    top: 0;
+    right: -50%;
+    top: -50%;
 `;
 
 const AbsoluteContainer = styled("div")`
@@ -479,7 +483,7 @@ export default class Presentation extends React.Component {
                         title="babel-plugin-lodash"
                         subtitle="Why learn ASTs?"
                     />
-                    <AbsoluteContainer alignItems="flex-start" flexDirection="row" padding="0" bottom="0">
+                    <AbsoluteContainer alignItems="flex-start" flexDirection="row" padding="0" top="55%">
                         <Image padding="0 0.25rem" src={images.babelLodashIn.replace("/", "")} width="50%" />
                         <Image padding="0 0.25rem" src={images.babelLodashOut.replace("/", "")} width="50%" />
                     </AbsoluteContainer>
@@ -498,7 +502,7 @@ export default class Presentation extends React.Component {
                         flexDirection="row"
                         justifyContent="center"
                         padding="0"
-                        bottom="-25px"
+                        top="55%"
                     >
                         <Image
                             margin="0"
@@ -541,6 +545,27 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="secondary" progressColor="primary">
                     <Notes>
+                        <h1>Uglify</h1>
+                        <ul>
+                            <li>Scope analysis</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={3} title="Why learn ASTs?" />
+                    <AbsoluteContainer
+                        alignItems="flex-end"
+                        flexDirection="column"
+                        padding="15% 10% 0 0"
+                        top="0"
+                        right="0"
+                    >
+                        <Image width="60%" margin="0 0 1rem 0" src={images.uglifyIn.replace("/", "")} />
+                        <Image width="60%" margin="0" src={images.uglifyOut.replace("/", "")} />
+                    </AbsoluteContainer>
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
                         <h1>Prettier</h1>
                         <ul>
                             <li>Uses AST to pretty print</li>
@@ -548,6 +573,38 @@ export default class Presentation extends React.Component {
                         </ul>
                     </Notes>
                     <LogosSlideContent highlightedIndex={4} title="Why learn ASTs?" />
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Prettier</h1>
+                        <ul>
+                            <li>Uses AST to pretty print</li>
+                            <li>Location?</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={4} title="Why learn ASTs?" />
+                    <AbsoluteContainer
+                        alignItems="flex-start"
+                        flexDirection="row"
+                        justifyContent="center"
+                        padding="0"
+                        top="20%"
+                    >
+                        <Image
+                            margin="0"
+                            padding="0 0.25rem"
+                            src={images.prettierIn.replace("/", "")}
+                            width="38%"
+                        />
+                        <Image
+                            margin="0"
+                            padding="0 0.25rem"
+                            src={images.prettierOut.replace("/", "")}
+                            width="38%"
+                        />
+                    </AbsoluteContainer>
                     <Overlay />
                 </Slide>
 
