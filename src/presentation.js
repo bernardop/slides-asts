@@ -673,7 +673,7 @@ export default class Presentation extends React.Component {
                             <Image src={images.arrowRight.replace("/", "")} />
                         </FlexFill>
                         <FlexFill margin="3rem 0.5rem 0">
-                            <BoxedText padding="1rem" textFont="secondary">
+                            <BoxedText padding="1rem" textFont="secondary" textSize="2rem">
                                 Lexical Analysis<br />(Tokenization)
                             </BoxedText>
                         </FlexFill>
@@ -681,7 +681,7 @@ export default class Presentation extends React.Component {
                             <Image src={images.arrowRight.replace("/", "")} />
                         </FlexFill>
                         <FlexFill margin="3rem 0.5rem 0">
-                            <BoxedText padding="1rem" textFont="secondary">
+                            <BoxedText padding="1rem" textFont="secondary" textSize="2rem">
                                 Syntax Analysis<br />(Parsing)
                             </BoxedText>
                         </FlexFill>
@@ -689,7 +689,7 @@ export default class Presentation extends React.Component {
                             <Image src={images.arrowRight.replace("/", "")} />
                         </FlexFill>
                         <FlexFill margin="3rem 0.5rem 0">
-                            <BoxedText padding="4rem" textFont="secondary">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
                                 AST
                             </BoxedText>
                         </FlexFill>
