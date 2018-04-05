@@ -16,7 +16,8 @@ import {
     Slide,
     Text,
     Layout,
-    Fill
+    Fill,
+    S
 } from "spectacle";
 
 import preloader from "spectacle/lib/utils/preloader";
@@ -30,6 +31,8 @@ require("normalize.css");
 const images = {
     dpzLogo: require("./images/dpz-logo.png"),
     fam: require("./images/fam.jpg"),
+    dpzControl: require("./images/dpz-control.png"),
+    dpzExpB: require("./images/dpz-expB.png"),
     brianFordTweet: require("./images/briantford_status.png"),
     eslint: require("./images/eslint.svg"),
     babel: require("./images/babel-10.svg"),
@@ -46,11 +49,10 @@ const images = {
     babelOptChainOut: require("./images/babel-chaining-out.png"),
     eslintEmoji: require("./images/eslint-emoji.png"),
     eslintAnchor: require("./images/eslint-empty-anchor.png"),
-    githubJSCodeshift: require("./images/github-jscodeshift.png"),
-    githubBabelCodemod: require("./images/github-babel-codemod.png"),
     sourceCodeIcon: require("./images/source-code.png"),
     arrowRight: require("./images/arrow-right.jpg"),
     tokens: require("./images/tokens.png"),
+    tree: require("./images/tree.png"),
     ast: require("./images/ast.svg"),
     astCode: require("./images/ast-code.png"),
     astJson: require("./images/ast-json.png"),
@@ -122,6 +124,10 @@ const SlideTitleSecondary = styled(Heading)`
     top: 0;
     width: 92%;
     z-index: ${props => props.zIndex || "auto"};
+`;
+
+const StyledList = styled(List)`
+    width: 100%;
 `;
 
 const ListSansBullets = styled(List)`
@@ -204,6 +210,7 @@ const AbsoluteContainer = styled("div")`
     position: absolute;
     right: ${props => props.right || "auto"};
     top: ${props => props.top || "auto"};
+    width: ${props => props.width || "auto"};
     z-index: 100;
 `;
 
@@ -346,6 +353,25 @@ class LogosSlideContent extends React.Component {
     }
 }
 
+const VisitorExample = ({ astImg, visitorImg, consoleImg }) => (
+    <React.Fragment>
+        <SlideTitle textColor="primary" size={4}>
+            Visitor Pattern
+        </SlideTitle>
+        <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+            Working with ASTs
+        </SlideTitleSecondary>
+        <Layout>
+            <FlexFill vAlign="flex-start">
+                <Image src={images[astImg].replace("/", "")} width="75%" />
+            </FlexFill>
+            <FlexFill vAlign="flex-start">
+                <Image src={images[visitorImg].replace("/", "")} width="75%" />
+                <Image margin="2rem 0" src={images[consoleImg].replace("/", "")} width="75%" />
+            </FlexFill>
+        </Layout>
+    </React.Fragment>
+);
 export default class Presentation extends React.Component {
     render() {
         return (
@@ -379,6 +405,26 @@ export default class Presentation extends React.Component {
                     </Text>
                 </Slide>
 
+                <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <SlideTitle textColor="primary" size={4}>
+                        A/B Testing
+                    </SlideTitle>
+                    <Layout>
+                        <FlexFill margin="0.5rem 0 0 0" padded={true} vAlign="flex-start">
+                            <Image margin="0" src={images.dpzControl.replace("/", "")} width="80%" />
+                            <Text margin="1rem 0 0 0" textFont="secondary">
+                                Control
+                            </Text>
+                        </FlexFill>
+                        <FlexFill margin="0.5rem 0 0 0" padded={true} vAlign="flex-start">
+                            <Image margin="0" src={images.dpzExpB.replace("/", "")} width="80%" />
+                            <Text margin="1rem 0 0 0" textFont="secondary">
+                                Experience B
+                            </Text>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
                 <Slide bgColor="primary" transition={["zoom"]}>
                     <AgendaHeading caps size={3} textColor="tertiary">
                         Agenda
@@ -398,8 +444,8 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        Cue tweet about ASTs...
+                    <SlideTitle textColor="primary" size={4} fit>
+                        Cue obligatory tweet about presentation topic...
                     </SlideTitle>
                 </Slide>
 
@@ -534,6 +580,32 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="secondary" progressColor="primary">
                     <Notes>
+                        <h1>Webpack</h1>
+                        <ul>
+                            <li>Performs static analysis on the AST to support any type of module</li>
+                            <li>Version 4 - possible to pass AST directly from loader to webpack</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={2} title="Why learn ASTs?" />
+                    <AbsoluteContainer
+                        alignItems="flex-start"
+                        justifyContent="flex-start"
+                        padding="0"
+                        top="20%"
+                        width="50%"
+                    >
+                        <List textFont="secondary" textColor="quaternary">
+                            <ListItem>
+                                Performs static analysis on the AST to support any type of module
+                            </ListItem>
+                            <ListItem>In version 4, webpack accepts an AST from loaders</ListItem>
+                        </List>
+                    </AbsoluteContainer>
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
                         <h1>Uglify</h1>
                         <ul>
                             <li>Scope analysis</li>
@@ -619,39 +691,39 @@ export default class Presentation extends React.Component {
                     <Overlay />
                 </Slide>
 
-                <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
-                    <Notes>
-                        <ul>
-                            <li>
-                                js-codemod
-                                <ul>
-                                    <li>
+                <Slide bgColor="secondary" progressColor="primary">
+                    <LogosSlideContent highlightedIndex={5} subtitle="Why learn ASTs?" title="Codemods" />
+                    <AbsoluteContainer
+                        alignItems="flex-start"
+                        justifyContent="flex-start"
+                        padding="0"
+                        top="20%"
+                        width="60%"
+                    >
+                        <StyledList textFont="secondary" textColor="quaternary">
+                            <ListItem>
+                                <S type="bold" textSize="3.5rem">
+                                    js-codemod
+                                </S>
+                                <List>
+                                    <ListItem>
                                         Convert <code>var</code> to <code>const</code> or <code>let</code>
-                                    </li>
-                                    <li>Transform object literals to use ES6 shorthand</li>
-                                </ul>
-                            </li>
-                            <li>
-                                react-codemod
-                                <ul>
-                                    <li>rename-unsafe-lifecycles</li>
-                                    <li>React-PropTypes-to-prop-types</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </Notes>
-                    <SlideTitle textColor="primary" size={4}>
-                        Codemods
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Why learn ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill margin="1rem 0 0 0">
-                            <Image width="70%" src={images.githubBabelCodemod.replace("/", "")} />
-                            <Image width="70%" src={images.githubJSCodeshift.replace("/", "")} />
-                        </FlexFill>
-                    </Layout>
+                                    </ListItem>
+                                    <ListItem>Transform object literals to use ES6 shorthand</ListItem>
+                                </List>
+                            </ListItem>
+                            <ListItem margin="0.5rem 0 0 0">
+                                <S type="bold" textSize="3.5rem">
+                                    react-codemod
+                                </S>
+                                <List>
+                                    <ListItem>rename-unsafe-lifecycles</ListItem>
+                                    <ListItem>React-PropTypes-to-prop-types</ListItem>
+                                </List>
+                            </ListItem>
+                        </StyledList>
+                    </AbsoluteContainer>
+                    <Overlay />
                 </Slide>
 
                 <Slide bgColor="primary" transition={["slide", "zoom"]}>
@@ -718,6 +790,67 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <Notes>
+                        <h1>Parsers</h1>
+                        <ul>
+                            <li />
+                        </ul>
+                    </Notes>
+                    <SlideTitle textColor="primary" size={4}>
+                        Parsers
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
+                                Acorn
+                            </BoxedText>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
+                                Esprima
+                            </BoxedText>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
+                                Espree
+                            </BoxedText>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
+                                Babylon
+                            </BoxedText>
+                        </FlexFill>
+                    </Layout>
+
+                    <Layout>
+                        <Appear>
+                            <FlexFill margin="3rem 0.5rem 0">
+                                <BoxedText padding="3rem 22rem" textFont="secondary" textSize="2rem">
+                                    ESTree
+                                </BoxedText>
+                            </FlexFill>
+                        </Appear>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
+                    <SlideTitle textColor="primary" size={4}>
+                        Tree Data Structure
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0">
+                            <Image src={images.tree.replace("/", "")} width="50%" />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
                         Consider this code snippet...
                     </SlideTitle>
@@ -757,11 +890,8 @@ export default class Presentation extends React.Component {
                         </ul>
                     </Notes>
                     <SlideTitle textColor="primary" size={4}>
-                        This is it
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
                         What is an AST?
-                    </SlideTitleSecondary>
+                    </SlideTitle>
                     <Layout>
                         <FlexFill margin="1rem 0 0 0" height="500px" overflow="auto" vAlign="flex-start">
                             <StyledImage margin="0" src={images.astJson.replace("/", "")} width="750px" />
@@ -814,7 +944,7 @@ export default class Presentation extends React.Component {
                         Tools
                     </SlideTitle>
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
+                        Working with ASTs
                     </SlideTitleSecondary>
                     <Layout>
                         <FlexFill margin="1rem 0 0 0" padded={true}>
@@ -855,7 +985,7 @@ export default class Presentation extends React.Component {
                         Visitor Pattern
                     </SlideTitle>
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
+                        Working with ASTs
                     </SlideTitleSecondary>
                     <Layout>
                         <FlexFill margin="1rem 0 0 0" padded={true}>
@@ -874,7 +1004,7 @@ export default class Presentation extends React.Component {
                         Visitor Pattern
                     </SlideTitle>
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
+                        Working with ASTs
                     </SlideTitleSecondary>
                     <Layout>
                         <FlexFill margin="1rem 0 0 0" padded={true}>
@@ -884,170 +1014,39 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
-                            <Image src={images.console1.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast" visitorImg="visitor" consoleImg="console1" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast1.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
-                            <Image src={images.console1.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast1" visitorImg="visitor" consoleImg="console1" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast2.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitorIdentifier.replace("/", "")} width="500px" />
-                            <Image src={images.console2.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast2" visitorImg="visitorIdentifier" consoleImg="console2" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast3.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitorIdentifier.replace("/", "")} width="500px" />
-                            <Image src={images.console3.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast3" visitorImg="visitorIdentifier" consoleImg="console3" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast4.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
-                            <Image src={images.console3.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast4" visitorImg="visitor" consoleImg="console3" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast5.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
-                            <Image src={images.console3.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast5" visitorImg="visitor" consoleImg="console3" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast6.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitorBinary.replace("/", "")} width="500px" />
-                            <Image src={images.console4.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast6" visitorImg="visitorBinary" consoleImg="console4" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast7.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitorIdentifier.replace("/", "")} width="500px" />
-                            <Image src={images.console5.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast7" visitorImg="visitorIdentifier" consoleImg="console5" />
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary">
-                    <Notes>
-                        <ul>
-                            <li>Both ESLint and Babel use this pattern</li>
-                        </ul>
-                    </Notes>
-                    <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
-                    </SlideTitle>
-                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
-                        Working with ASTs?
-                    </SlideTitleSecondary>
-                    <Layout>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.add2Ast8.replace("/", "")} width="450px" />
-                        </FlexFill>
-                        <FlexFill vAlign="flex-start">
-                            <Image src={images.visitor.replace("/", "")} width="500px" />
-                            <Image src={images.console5.replace("/", "")} width="500px" />
-                        </FlexFill>
-                    </Layout>
+                    <VisitorExample astImg="add2Ast8" visitorImg="visitor" consoleImg="console5" />
                 </Slide>
 
                 <Slide bgColor="primary" transition={["slide"]}>
@@ -1108,15 +1107,17 @@ export default class Presentation extends React.Component {
                         Writing a custom Babel plugin
                     </SlideTitleSecondary>
                     <Layout>
-                        <FlexFill margin="1rem 0 0 0" vAlign="flex-start">
+                        <FlexFill margin="0.25rem 0 0 0" vAlign="flex-start">
                             <div>
-                                <Image src={images.pathsNode.replace("/", "")} width="400px" />
-                                <Text textFont="secondary">Node</Text>
+                                <Image src={images.pathsNode.replace("/", "")} width="70%" />
+                                <Text textFont="secondary" textSize="1.5rem">
+                                    Node
+                                </Text>
                             </div>
                             <Appear>
                                 <div>
-                                    <Image src={images.pathsPath.replace("/", "")} width="400px" />
-                                    <Text margin="0.25rem 0 0 0" textFont="secondary">
+                                    <Image src={images.pathsPath.replace("/", "")} width="70%" />
+                                    <Text margin="0" textFont="secondary" textSize="1.5rem">
                                         Path
                                     </Text>
                                 </div>
@@ -1125,8 +1126,8 @@ export default class Presentation extends React.Component {
                         <FlexFill>
                             <Appear>
                                 <div>
-                                    <Image src={images.pathsMeta.replace("/", "")} width="400px" />
-                                    <Text margin="0.25rem 0 0 0" textFont="secondary">
+                                    <Image src={images.pathsMeta.replace("/", "")} width="70%" />
+                                    <Text margin="0.25rem 0 0 0" textFont="secondary" textSize="1.5rem">
                                         Path + metadata
                                     </Text>
                                 </div>
