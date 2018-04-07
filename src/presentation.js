@@ -80,7 +80,11 @@ const images = {
     console5: require("./images/console5.png"),
     pathsNode: require("./images/paths-node.png"),
     pathsPath: require("./images/paths-path.png"),
-    pathsMeta: require("./images/paths-meta.png")
+    pathsMeta: require("./images/paths-meta.png"),
+    dpzViewIn: require("./images/dpz-view-in.png"),
+    dpzViewOut: require("./images/dpz-view-out.png"),
+    dpzPreactIn: require("./images/dpz-preact-in.png"),
+    dpzPreactOut: require("./images/dpz-preact-out.png")
 };
 
 preloader(images);
@@ -159,6 +163,8 @@ const LogoImage = styled(Image)`
 
 const StyledImage = styled(Image)`
     max-height: none !important;
+    transform: ${props => props.transform || "none"};
+    visibility: ${props => props.visibility || "visible"};
     width: ${props => props.width || "auto"};
 `;
 
@@ -178,6 +184,7 @@ const FlexFill = styled(Fill)`
 
 const BoxedText = styled(Text)`
     border: 1px solid #333;
+    visibility: ${props => props.visibility || "visible"};
 `;
 
 const StyledLink = styled(Link)`
@@ -218,7 +225,7 @@ class AgendaSlideContent extends React.Component {
     render() {
         const { focusedIndex } = this.props;
         const agendaItems = [
-            "Why learn ASTs",
+            "Why learn ASTs?",
             "What is an AST?",
             "Working with ASTs",
             "Writing a custom ESLint rule",
@@ -432,7 +439,7 @@ export default class Presentation extends React.Component {
                     <ListSansBullets color="secondary" textFont="secondary">
                         <AppearingListItem>Why learn ASTs?</AppearingListItem>
                         <AppearingListItem>What is an AST?</AppearingListItem>
-                        <AppearingListItem>Working with ASTs?</AppearingListItem>
+                        <AppearingListItem>Working with ASTs</AppearingListItem>
                         <AppearingListItem>Writing a custom ESLint rule</AppearingListItem>
                         <AppearingListItem>Writing a custom Babel plugin</AppearingListItem>
                         <AppearingListItem>ASTs at Domino's</AppearingListItem>
@@ -792,9 +799,16 @@ export default class Presentation extends React.Component {
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <Notes>
                         <h1>Parsers</h1>
-                        <ul>
-                            <li />
-                        </ul>
+                        <dl>
+                            <dt>Esprima</dt>
+                            <dd>One of the earliest parsers for JavaScript</dd>
+                            <dt>Acorn</dt>
+                            <dd>Smaller and faster than Esprima</dd>
+                            <dt>Espree</dt>
+                            <dd>Built by the ESLint team. Fork of Esprima.</dd>
+                            <dt>Babylon</dt>
+                            <dd>Heavily based on Acorn. Babel team built it.</dd>
+                        </dl>
                     </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         Parsers
@@ -805,12 +819,12 @@ export default class Presentation extends React.Component {
                     <Layout>
                         <FlexFill margin="3rem 0.5rem 0">
                             <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
-                                Acorn
+                                Esprima
                             </BoxedText>
                         </FlexFill>
                         <FlexFill margin="3rem 0.5rem 0">
                             <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
-                                Esprima
+                                Acorn
                             </BoxedText>
                         </FlexFill>
                         <FlexFill margin="3rem 0.5rem 0">
@@ -824,15 +838,91 @@ export default class Presentation extends React.Component {
                             </BoxedText>
                         </FlexFill>
                     </Layout>
-
                     <Layout>
-                        <Appear>
-                            <FlexFill margin="3rem 0.5rem 0">
-                                <BoxedText padding="3rem 22rem" textFont="secondary" textSize="2rem">
-                                    ESTree
-                                </BoxedText>
+                        {[...Array(4)].map((n, i) => (
+                            <FlexFill margin="0 0.5rem" key={i}>
+                                <StyledImage
+                                    src={images.arrowRight.replace("/", "")}
+                                    transform="rotate(90deg)"
+                                    visibility="hidden"
+                                    width="3rem"
+                                />
                             </FlexFill>
-                        </Appear>
+                        ))}
+                    </Layout>
+                    <Layout>
+                        <FlexFill margin="0 0.5rem">
+                            <BoxedText
+                                padding="3rem 22rem"
+                                textFont="secondary"
+                                textSize="2rem"
+                                visibility="hidden"
+                            >
+                                ESTree
+                            </BoxedText>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Parsers</h1>
+                        <dl>
+                            <dt>Esprima</dt>
+                            <dd>One of the earliest parsers for JavaScript</dd>
+                            <dt>Acorn</dt>
+                            <dd>Smaller and faster than Esprima</dd>
+                            <dt>Espree</dt>
+                            <dd>Built by the ESLint team. Fork of Esprima.</dd>
+                            <dt>Babylon</dt>
+                            <dd>Heavily based on Acorn. Babel team built it.</dd>
+                        </dl>
+                    </Notes>
+                    <SlideTitle textColor="primary" size={4}>
+                        Parsers
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        What is an AST?
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
+                                Esprima
+                            </BoxedText>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
+                                Acorn
+                            </BoxedText>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
+                                Espree
+                            </BoxedText>
+                        </FlexFill>
+                        <FlexFill margin="3rem 0.5rem 0">
+                            <BoxedText padding="3rem" textFont="secondary" textSize="2rem">
+                                Babylon
+                            </BoxedText>
+                        </FlexFill>
+                    </Layout>
+                    <Layout>
+                        {[...Array(4)].map((n, i) => (
+                            <FlexFill margin="0 0.5rem" key={i}>
+                                <StyledImage
+                                    src={images.arrowRight.replace("/", "")}
+                                    transform="rotate(90deg)"
+                                    width="3rem"
+                                />
+                            </FlexFill>
+                        ))}
+                    </Layout>
+                    <Layout>
+                        <FlexFill margin="0 0.5rem">
+                            <BoxedText padding="3rem 22rem" textFont="secondary" textSize="2rem">
+                                ESTree
+                            </BoxedText>
+                        </FlexFill>
                     </Layout>
                 </Slide>
 
@@ -876,7 +966,7 @@ export default class Presentation extends React.Component {
                             <StyledImage width="700px" src={images.ast.replace("/", "")} />
                         </FlexFill>
                         <FlexFill vAlign="flex-start" margin="1rem 0 0 0">
-                            <Image margin="0" width="500px" src={images.astCode.replace("/", "")} />
+                            <Image margin="3rem" width="500px" src={images.astCode.replace("/", "")} />
                         </FlexFill>
                     </Layout>
                 </Slide>
@@ -1164,6 +1254,50 @@ export default class Presentation extends React.Component {
                                     Complete
                                 </Text>
                             </StyledLink>
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="primary" transition={["fade"]}>
+                    <AgendaSlideContent focusedIndex={5} />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <SlideTitle textColor="primary" size={4}>
+                        Generating a view
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        ASTs at Domino's
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="1rem 0 0 0" padded={true} vAlign="flex-start">
+                            <Text textFont="secondary">In</Text>
+                            <Image margin="0" src={images.dpzViewIn.replace("/", "")} />
+                        </FlexFill>
+                        <FlexFill margin="1rem 0 0 0" padded={true} vAlign="flex-start">
+                            <Text textFont="secondary">Out</Text>
+                            <Image margin="0" src={images.dpzViewOut.replace("/", "")} />
+                        </FlexFill>
+                    </Layout>
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <SlideTitle textColor="primary" size={4}>
+                        Generating a component
+                    </SlideTitle>
+                    <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
+                        ASTs at Domino's
+                    </SlideTitleSecondary>
+                    <Layout>
+                        <FlexFill margin="0" padded={true} vAlign="flex-start">
+                            <Text textFont="secondary" textSize="1.5rem">
+                                In
+                            </Text>
+                            <Image margin="0" src={images.dpzPreactIn.replace("/", "")} width="60%" />
+                            <Text margin="2rem 0 0" textFont="secondary" textSize="1.5rem">
+                                Out
+                            </Text>
+                            <Image margin="0" src={images.dpzPreactOut.replace("/", "")} width="60%" />
                         </FlexFill>
                     </Layout>
                 </Slide>
