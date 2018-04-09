@@ -199,11 +199,11 @@ const StyledListItem = styled(ListItem)`
 
 const Overlay = styled("div")`
     background: rgba(255, 255, 255, 0.95);
-    bottom: -50%;
-    left: -50%;
+    bottom: -2000px;
+    left: -200px;
     position: fixed;
-    right: -50%;
-    top: -50%;
+    right: -200px;
+    top: -200px;
 `;
 
 const AbsoluteContainer = styled("div")`
@@ -363,7 +363,7 @@ class LogosSlideContent extends React.Component {
 const VisitorExample = ({ astImg, visitorImg, consoleImg }) => (
     <React.Fragment>
         <SlideTitle textColor="primary" size={4}>
-            Visitor Pattern
+            Visitor Pattern Example
         </SlideTitle>
         <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
             Working with ASTs
@@ -373,8 +373,8 @@ const VisitorExample = ({ astImg, visitorImg, consoleImg }) => (
                 <Image src={images[astImg].replace("/", "")} width="75%" />
             </FlexFill>
             <FlexFill vAlign="flex-start">
-                <Image src={images[visitorImg].replace("/", "")} width="75%" />
-                <Image margin="2rem 0" src={images[consoleImg].replace("/", "")} width="75%" />
+                <Image src={images[visitorImg].replace("/", "")} width="95%" />
+                <Image margin="2rem 0" src={images[consoleImg].replace("/", "")} width="95%" />
             </FlexFill>
         </Layout>
     </React.Fragment>
@@ -387,7 +387,7 @@ export default class Presentation extends React.Component {
                     <Heading size={4} lineHeight={1} textColor="primary">
                         ASTronomically Improving Your Developer Experience
                     </Heading>
-                    <Heading size={5} fit lineHeight={1} textColor="tertiary">
+                    <Heading size={6} lineHeight={1} textColor="tertiary">
                         (A JS Abstract Syntax Trees Primer)
                     </Heading>
                     <Text margin="5rem 0 0" textAlign="right" textColor="quaternary" textFont="secondary">
@@ -577,8 +577,11 @@ export default class Presentation extends React.Component {
                     <Notes>
                         <h1>Webpack</h1>
                         <ul>
-                            <li>Performs static analysis on the AST to support any type of module</li>
-                            <li>Version 4 - possible to pass AST directly from loader to webpack</li>
+                            <li>Static module bundler for modern JavaScript applications</li>
+                            <li>
+                                It builds a dependency graph that includes every module your application
+                                needs, then packages all of those modules into one or more bundles.
+                            </li>
                         </ul>
                     </Notes>
                     <LogosSlideContent highlightedIndex={2} title="Why learn ASTs?" />
@@ -691,7 +694,7 @@ export default class Presentation extends React.Component {
                     <Notes>
                         <h1>JSCodeshift</h1>
                         <ul>
-                            <li>Write transformations that operate on multiple files</li>
+                            <li>a toolkit for running codemods over multiple JS files.</li>
                         </ul>
                     </Notes>
                     <LogosSlideContent highlightedIndex={5} title="Why learn ASTs?" />
@@ -866,16 +869,10 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="secondary" progressColor="primary">
                     <Notes>
-                        <h1>Parsers</h1>
+                        <h1>ESTree</h1>
                         <dl>
-                            <dt>Esprima</dt>
-                            <dd>One of the earliest parsers for JavaScript</dd>
-                            <dt>Acorn</dt>
-                            <dd>Smaller and faster than Esprima</dd>
-                            <dt>Espree</dt>
-                            <dd>Built by the ESLint team. Fork of Esprima.</dd>
-                            <dt>Babylon</dt>
-                            <dd>Heavily based on Acorn. Babel team built it.</dd>
+                            <dt>ESTree Spec</dt>
+                            <dd>A community AST standard that includes latest ECMAScript features</dd>
                         </dl>
                     </Notes>
                     <SlideTitle textColor="primary" size={4}>
@@ -1091,7 +1088,7 @@ export default class Presentation extends React.Component {
                         </ul>
                     </Notes>
                     <SlideTitle textColor="primary" size={4}>
-                        Visitor Pattern
+                        Visitor Pattern Example
                     </SlideTitle>
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
                         Working with ASTs
@@ -1150,7 +1147,7 @@ export default class Presentation extends React.Component {
                     <Layout>
                         <FlexFill margin="3rem 0 0 0">
                             <StyledLink
-                                href="http://astexplorer.net/#/gist/79e64f9274c055428a14c1916edc590b/61b5cad748ed099e1e3bc999e8f35a0a4b33a578"
+                                href="http://astexplorer.net/#/gist/79e64f9274c055428a14c1916edc590b/4226c2e5ac82b755c7355b14b4561578b9f37b60"
                                 target="_blank"
                                 padding="1rem"
                             >
@@ -1233,7 +1230,7 @@ export default class Presentation extends React.Component {
                     <Layout>
                         <FlexFill margin="3rem 0 0 0">
                             <StyledLink
-                                href="http://astexplorer.net/#/gist/de02c56dbb8eec0a1fdff1c8e096a1fa/0a5e3cc01a9bdef5c5e20607082a749daed1d4de"
+                                href="http://astexplorer.net/#/gist/de02c56dbb8eec0a1fdff1c8e096a1fa/c286f710459e6c779c967f9ac70927956db1bac1"
                                 target="_blank"
                                 padding="1rem"
                             >
