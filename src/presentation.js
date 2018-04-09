@@ -235,7 +235,7 @@ class AgendaSlideContent extends React.Component {
 
         return (
             <React.Fragment>
-                <AgendaHeading caps size={3} textColor="tertiary">
+                <AgendaHeading caps size={4} textColor="tertiary">
                     Agenda
                 </AgendaHeading>
                 <ListSansBullets color="secondary" textFont="secondary">
@@ -413,6 +413,15 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="secondary" progressColor="primary" transition={["fade"]}>
+                    <Notes>
+                        <h1>Story Time</h1>
+                        <ul>
+                            <li>Push new features to a % of customers</li>
+                            <li>4 - 6 tests every 2 weeks</li>
+                            <li>Built CLI to help scaffold new tests and clean past tests</li>
+                            <li>Started hearing about codemods/ASTs/babel transforms</li>
+                        </ul>
+                    </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         A/B Testing
                     </SlideTitle>
@@ -433,7 +442,7 @@ export default class Presentation extends React.Component {
                 </Slide>
 
                 <Slide bgColor="primary" transition={["zoom"]}>
-                    <AgendaHeading caps size={3} textColor="tertiary">
+                    <AgendaHeading caps size={4} textColor="tertiary">
                         Agenda
                     </AgendaHeading>
                     <ListSansBullets color="secondary" textFont="secondary">
@@ -489,7 +498,7 @@ export default class Presentation extends React.Component {
                             </li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={0} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={0} subtitle="Why learn ASTs?" title="ESLint" />
                     <Overlay />
                 </Slide>
 
@@ -526,7 +535,7 @@ export default class Presentation extends React.Component {
                             <li>Compile newer JS features down to a supported version</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={1} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={1} subtitle="Why learn ASTs?" title="Babel" />
                     <Overlay />
                 </Slide>
 
@@ -584,7 +593,7 @@ export default class Presentation extends React.Component {
                             </li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={2} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={2} subtitle="Why learn ASTs?" title="Webpack" />
                     <Overlay />
                 </Slide>
 
@@ -596,19 +605,21 @@ export default class Presentation extends React.Component {
                             <li>Version 4 - possible to pass AST directly from loader to webpack</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={2} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={2} subtitle="Why learn ASTs?" title="Webpack" />
                     <AbsoluteContainer
                         alignItems="flex-start"
                         justifyContent="flex-start"
                         padding="0"
                         top="20%"
-                        width="50%"
+                        width="55%"
                     >
-                        <List textFont="secondary" textColor="quaternary">
+                        <List textFont="primary" textColor="quaternary">
                             <ListItem>
                                 Performs static analysis on the AST to support any type of module
                             </ListItem>
-                            <ListItem>In version 4, webpack accepts an AST from loaders</ListItem>
+                            <ListItem>
+                                In v4, webpack accepts an AST from loaders to avoid double parsing
+                            </ListItem>
                         </List>
                     </AbsoluteContainer>
                     <Overlay />
@@ -621,7 +632,7 @@ export default class Presentation extends React.Component {
                             <li>Scope analysis</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={3} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={3} subtitle="Why learn ASTs?" title="Uglify" />
                     <Overlay />
                 </Slide>
 
@@ -632,7 +643,7 @@ export default class Presentation extends React.Component {
                             <li>Scope analysis</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={3} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={3} subtitle="Why learn ASTs?" title="Uglify" />
                     <AbsoluteContainer
                         alignItems="flex-end"
                         flexDirection="column"
@@ -654,7 +665,7 @@ export default class Presentation extends React.Component {
                             <li>Location?</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={4} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={4} subtitle="Why learn ASTs?" title="Prettier" />
                     <Overlay />
                 </Slide>
 
@@ -666,7 +677,7 @@ export default class Presentation extends React.Component {
                             <li>Location?</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={4} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={4} subtitle="Why learn ASTs?" title="Prettier" />
                     <AbsoluteContainer
                         alignItems="flex-start"
                         flexDirection="row"
@@ -697,7 +708,7 @@ export default class Presentation extends React.Component {
                             <li>a toolkit for running codemods over multiple JS files.</li>
                         </ul>
                     </Notes>
-                    <LogosSlideContent highlightedIndex={5} title="Why learn ASTs?" />
+                    <LogosSlideContent highlightedIndex={5} subtitle="Why learn ASTs?" title="JSCodeshift" />
                     <Overlay />
                 </Slide>
 
@@ -708,27 +719,29 @@ export default class Presentation extends React.Component {
                         justifyContent="flex-start"
                         padding="0"
                         top="20%"
-                        width="60%"
+                        width="55%"
                     >
-                        <StyledList textFont="secondary" textColor="quaternary">
+                        <StyledList textFont="primary" textColor="quaternary">
                             <ListItem>
-                                <S type="bold" textSize="3.5rem">
+                                <S type="bold" textSize="2.75rem">
                                     js-codemod
                                 </S>
                                 <List>
-                                    <ListItem>
+                                    <ListItem textSize="2.25rem">
                                         Convert <code>var</code> to <code>const</code> or <code>let</code>
                                     </ListItem>
-                                    <ListItem>Transform object literals to use ES6 shorthand</ListItem>
+                                    <ListItem textSize="2.25rem">
+                                        Transform object literals to use ES6 shorthand
+                                    </ListItem>
                                 </List>
                             </ListItem>
                             <ListItem margin="0.5rem 0 0 0">
-                                <S type="bold" textSize="3.5rem">
+                                <S type="bold" textSize="2.75rem">
                                     react-codemod
                                 </S>
                                 <List>
-                                    <ListItem>rename-unsafe-lifecycles</ListItem>
-                                    <ListItem>React-PropTypes-to-prop-types</ListItem>
+                                    <ListItem textSize="2.25rem">rename-unsafe-lifecycles</ListItem>
+                                    <ListItem textSize="2.25rem">React-PropTypes-to-prop-types</ListItem>
                                 </List>
                             </ListItem>
                         </StyledList>
@@ -742,7 +755,7 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
-                        Compilers at a glance
+                        Parsers at a glance
                     </SlideTitle>
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
                         What is an AST?
