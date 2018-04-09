@@ -917,7 +917,7 @@ export default class Presentation extends React.Component {
                     <Layout>
                         <FlexFill margin="0 0.5rem">
                             <BoxedText padding="3rem 22rem" textFont="secondary" textSize="2rem">
-                                ESTree
+                                ESTree Spec
                             </BoxedText>
                         </FlexFill>
                     </Layout>
