@@ -192,6 +192,20 @@ const StyledLink = styled(Link)`
     padding: ${props => props.padding || "0"};
 `;
 
+const ResourceLink = styled(Link)`
+    color: #0078ae;
+
+    &:active,
+    &:visited,
+    &:focus {
+        color: #0078ae;
+    }
+
+    &:hover {
+        color: #fa001f;
+    }
+`;
+
 const StyledListItem = styled(ListItem)`
     list-style-position: outside;
     margin: 0.5rem 0;
@@ -793,11 +807,23 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <Notes>
-                        <h1>Tokenization</h1>
-                        <ul>
-                            <li>Minimum sequence of characters with meaning</li>
-                            <li>Grammar - valid way of combining tokens</li>
-                        </ul>
+                        <h1>Lexical Analysis</h1>
+                        <dl>
+                            <dt>Tokenization</dt>
+                            <dd>
+                                Identifying the minimum sequence of characters (tokens) that have some meaning
+                            </dd>
+                            <dt>Tokens</dt>
+                            <dd>
+                                Represent the alphabet of a language; can't be broken into smaller parts; can
+                                be combined to form a program
+                            </dd>
+                            <dt>Grammar</dt>
+                            <dd>
+                                Valid ways of combining tokens; defines relationships between tokens;
+                                describes the <em>syntax</em> of a language
+                            </dd>
+                        </dl>
                     </Notes>
                     <SlideTitle textColor="primary" size={4}>
                         Lexical Analysis
@@ -1316,15 +1342,15 @@ export default class Presentation extends React.Component {
                     <SlideTitle textColor="primary">Resources</SlideTitle>
                     <List ordered={true} type="1">
                         <StyledListItem>
-                            <Link href="http://astexplorer.net/" target="_blank">
+                            <ResourceLink href="http://astexplorer.net/" target="_blank">
                                 <span role="img" aria-label="tools">
                                     🛠
                                 </span>{" "}
                                 AST Explorer
-                            </Link>
+                            </ResourceLink>
                         </StyledListItem>
                         <StyledListItem>
-                            <Link
+                            <ResourceLink
                                 href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md"
                                 target="_blank"
                             >
@@ -1332,34 +1358,34 @@ export default class Presentation extends React.Component {
                                     📓
                                 </span>{" "}
                                 Babel Plugin Handbook
-                            </Link>
+                            </ResourceLink>
                         </StyledListItem>
                         <StyledListItem>
-                            <Link href="https://github.com/estree/estree" target="_blank">
+                            <ResourceLink href="https://github.com/estree/estree" target="_blank">
                                 <span role="img" aria-label="notebook">
                                     📓
                                 </span>{" "}
                                 The ESTree Spec
-                            </Link>
+                            </ResourceLink>
                         </StyledListItem>
                         <StyledListItem>
-                            <Link href="https://www.youtube.com/watch?v=LRKlqR6KY_E" target="_blank">
+                            <ResourceLink href="https://www.youtube.com/watch?v=LRKlqR6KY_E" target="_blank">
                                 <span role="img" aria-label="tv">
                                     📺
                                 </span>{" "}
                                 As simple as an AST by Pavithra Kodmad
-                            </Link>
+                            </ResourceLink>
                         </StyledListItem>
                         <StyledListItem>
-                            <Link href="https://www.youtube.com/watch?v=VBscbcm2Mok" target="_blank">
+                            <ResourceLink href="https://www.youtube.com/watch?v=VBscbcm2Mok" target="_blank">
                                 <span role="img" aria-label="tv">
                                     📺
                                 </span>{" "}
                                 Writing custom Babel and ESLint plugins with ASTs by Kent C. Dodds
-                            </Link>
+                            </ResourceLink>
                         </StyledListItem>
                         <StyledListItem>
-                            <Link
+                            <ResourceLink
                                 href="https://resources.jointjs.com/demos/rappid/apps/Ast/index.html"
                                 target="_blank"
                             >
@@ -1367,7 +1393,7 @@ export default class Presentation extends React.Component {
                                     🛠
                                 </span>{" "}
                                 AST Visualizer
-                            </Link>
+                            </ResourceLink>
                         </StyledListItem>
                     </List>
                 </Slide>
