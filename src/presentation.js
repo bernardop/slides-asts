@@ -2,28 +2,26 @@
 import React from "react";
 import styled from "react-emotion";
 import { SocialIcon } from "react-social-icons";
-
 // Import Spectacle Core tags
 import {
     Appear,
     Deck,
+    Fill,
+    Fit,
     Heading,
     Image,
+    Layout,
     Link,
     List,
     ListItem,
     Notes,
+    S,
     Slide,
-    Text,
-    Layout,
-    Fill,
-    S
+    Text
 } from "spectacle";
-
-import preloader from "spectacle/lib/utils/preloader";
-
 // Import theme
 import createTheme from "spectacle/lib/themes/default";
+import preloader from "spectacle/lib/utils/preloader";
 
 // Require CSS
 require("normalize.css");
@@ -31,6 +29,8 @@ require("normalize.css");
 const images = {
     dpzLogo: require("./images/dpz-logo.png"),
     fam: require("./images/fam.jpg"),
+    famMex: require("./images/fam-mex.jpg"),
+    famMex2: require("./images/fam-mex-2.jpg"),
     dpzControl: require("./images/dpz-control.png"),
     dpzExpB: require("./images/dpz-expB.png"),
     brianFordTweet: require("./images/briantford_status.png"),
@@ -84,7 +84,9 @@ const images = {
     dpzViewIn: require("./images/dpz-view-in.png"),
     dpzViewOut: require("./images/dpz-view-out.png"),
     dpzPreactIn: require("./images/dpz-preact-in.png"),
-    dpzPreactOut: require("./images/dpz-preact-out.png")
+    dpzPreactOut: require("./images/dpz-preact-out.png"),
+    sponsorsSlide: require("./images/sponsors-slide-16-9.png"),
+    sponsorsSlide43: require("./images/sponsors-slide-4-3.png")
 };
 
 preloader(images);
@@ -173,7 +175,7 @@ const FlexFill = styled(Fill)`
     box-shadow: ${props =>
         props.highlight ? "inset 1px 1px 5px #e2213e, inset -1px -1px 5px #e2213e" : "none"};
     display: flex;
-    flex-direction: column;
+    flex-direction: ${props => props.flexDirection || "column"};
     height: ${props => props.height || "auto"};
     justify-content: ${props => props.vAlign || "center"};
     margin: ${props => props.margin || "0 0 3rem 0"};
@@ -394,7 +396,15 @@ const VisitorExample = ({ astImg, visitorImg, consoleImg }) => (
     </React.Fragment>
 );
 export default class Presentation extends React.Component {
+    state = {
+        resolution: "16:9"
+    };
+
     render() {
+        const sponsorsSlide =
+            this.state.resolution === "16:9"
+                ? images.sponsorsSlide.replace("/", "")
+                : images.sponsorsSlide43.replace("/", "");
         return (
             <Deck transitionDuration={500} theme={theme} progress="bar" controls={false}>
                 <Slide bgColor="secondary" progressColor="primary">
@@ -413,8 +423,16 @@ export default class Presentation extends React.Component {
                     </Text>
                 </Slide>
 
+                <Slide bgImage={sponsorsSlide} transition={["zoom"]} />
+
                 <Slide bgColor="secondary" transition={["zoom"]}>
-                    <StyledImage src={images.fam.replace("/", "")} width="50%" />
+                    <Layout>
+                        <FlexFill flexDirection="row">
+                            <Image src={images.famMex.replace("/", "")} width="35%" />
+                            <Image src={images.famMex2.replace("/", "")} width="35%" />
+                        </FlexFill>
+                    </Layout>
+
                     <Text textColor="quaternary" textFont="secondary">
                         <Image
                             src={images.dpzLogo.replace("/", "")}
@@ -441,13 +459,13 @@ export default class Presentation extends React.Component {
                     </SlideTitle>
                     <Layout>
                         <FlexFill margin="0.5rem 0 0 0" padded={true} vAlign="flex-start">
-                            <Image margin="0" src={images.dpzControl.replace("/", "")} width="80%" />
+                            <Image margin="0" src={images.dpzControl.replace("/", "")} width="50%" />
                             <Text margin="1rem 0 0 0" textFont="secondary">
                                 Control
                             </Text>
                         </FlexFill>
                         <FlexFill margin="0.5rem 0 0 0" padded={true} vAlign="flex-start">
-                            <Image margin="0" src={images.dpzExpB.replace("/", "")} width="80%" />
+                            <Image margin="0" src={images.dpzExpB.replace("/", "")} width="50%" />
                             <Text margin="1rem 0 0 0" textFont="secondary">
                                 Experience B
                             </Text>
@@ -475,7 +493,7 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="secondary" transition={["slide"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4} fit>
-                        Cue obligatory tweet about presentation topic...
+                        Cue tweet about presentation topic...
                     </SlideTitle>
                 </Slide>
 
@@ -518,6 +536,42 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="secondary" progressColor="primary">
                     <Notes>
+                        <h1>ESLint</h1>
+                        <ul>
+                            <li>
+                                Static analysis
+                                <ul>
+                                    <li>Find problematic patterns</li>
+                                    <li>Adhere to certain guidelines</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={0} subtitle="Why learn ASTs?" title="ESLint" />
+                    <AbsoluteContainer
+                        alignItems="flex-start"
+                        justifyContent="flex-start"
+                        padding="0"
+                        top="20%"
+                        right="5%"
+                        width="55%"
+                    >
+                        <StyledList textFont="primary" textColor="quaternary">
+                            <ListItem textSize="2.25rem">JavaScript linting utility</ListItem>
+                            <ListItem textSize="2.25rem">
+                                Static analysis
+                                <List>
+                                    <ListItem textSize="2rem">Find problematic patterns</ListItem>
+                                    <ListItem textSize="2rem">Adhere to certain guidelines</ListItem>
+                                </List>
+                            </ListItem>
+                        </StyledList>
+                    </AbsoluteContainer>
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
                         <h1>Other ESLint plugins</h1>
                         <ul>
                             <li>eslint-plugin-import</li>
@@ -550,6 +604,31 @@ export default class Presentation extends React.Component {
                         </ul>
                     </Notes>
                     <LogosSlideContent highlightedIndex={1} subtitle="Why learn ASTs?" title="Babel" />
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Babel</h1>
+                        <ul>
+                            <li>Compile newer JS features down to a supported version</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={1} subtitle="Why learn ASTs?" title="Babel" />
+                    <AbsoluteContainer
+                        alignItems="flex-start"
+                        justifyContent="flex-start"
+                        padding="0"
+                        top="55%"
+                        width="100%"
+                    >
+                        <StyledList textFont="primary" textColor="quaternary">
+                            <ListItem textSize="2.25rem">
+                                Toolchain used to convert ECMAScript 2015+ code into a backwards compatible
+                                version of JavaScript in old browsers or environments
+                            </ListItem>
+                        </StyledList>
+                    </AbsoluteContainer>
                     <Overlay />
                 </Slide>
 
@@ -627,14 +706,15 @@ export default class Presentation extends React.Component {
                         top="20%"
                         width="55%"
                     >
-                        <List textFont="primary" textColor="quaternary">
-                            <ListItem>
+                        <StyledList textFont="primary" textColor="quaternary">
+                            <ListItem textSize="2.25rem">Static module bundler</ListItem>
+                            <ListItem textSize="2.25rem">
+                                Builds a dependency graph that includes every module your application needs
+                            </ListItem>
+                            <ListItem textSize="2.25rem">
                                 Performs static analysis on the AST to support any type of module
                             </ListItem>
-                            <ListItem>
-                                In v4, webpack accepts an AST from loaders to avoid double parsing
-                            </ListItem>
-                        </List>
+                        </StyledList>
                     </AbsoluteContainer>
                     <Overlay />
                 </Slide>
@@ -647,6 +727,30 @@ export default class Presentation extends React.Component {
                         </ul>
                     </Notes>
                     <LogosSlideContent highlightedIndex={3} subtitle="Why learn ASTs?" title="Uglify" />
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Uglify</h1>
+                        <ul>
+                            <li>Scope analysis</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={3} subtitle="Why learn ASTs?" title="Uglify" />
+                    <AbsoluteContainer
+                        alignItems="flex-start"
+                        justifyContent="flex-start"
+                        padding="0"
+                        top="40%"
+                        right="5%"
+                        width="55%"
+                    >
+                        <StyledList textFont="primary" textColor="quaternary">
+                            <ListItem textSize="2.25rem">JavaScript compresor/minifier</ListItem>
+                            <ListItem textSize="2.25rem">Scope analysis</ListItem>
+                        </StyledList>
+                    </AbsoluteContainer>
                     <Overlay />
                 </Slide>
 
@@ -675,7 +779,7 @@ export default class Presentation extends React.Component {
                     <Notes>
                         <h1>Prettier</h1>
                         <ul>
-                            <li>Uses AST to pretty print</li>
+                            <li>Parses JavaScript into an AST and pretty prints it with its own rules</li>
                             <li>Location?</li>
                         </ul>
                     </Notes>
@@ -687,7 +791,33 @@ export default class Presentation extends React.Component {
                     <Notes>
                         <h1>Prettier</h1>
                         <ul>
-                            <li>Uses AST to pretty print</li>
+                            <li>Parses JavaScript into an AST and pretty prints it with its own rules</li>
+                            <li>Location?</li>
+                        </ul>
+                    </Notes>
+                    <LogosSlideContent highlightedIndex={4} subtitle="Why learn ASTs?" title="Prettier" />
+                    <AbsoluteContainer
+                        alignItems="flex-start"
+                        justifyContent="flex-start"
+                        padding="0"
+                        top="20%"
+                        width="100%"
+                    >
+                        <StyledList textFont="primary" textColor="quaternary">
+                            <ListItem textSize="2.25rem">An opinionated code formatter</ListItem>
+                            <ListItem textSize="2.25rem">
+                                Parses JavaScript into an AST and pretty prints it with its own rules
+                            </ListItem>
+                        </StyledList>
+                    </AbsoluteContainer>
+                    <Overlay />
+                </Slide>
+
+                <Slide bgColor="secondary" progressColor="primary">
+                    <Notes>
+                        <h1>Prettier</h1>
+                        <ul>
+                            <li>Parses JavaScript into an AST and pretty prints it with its own rules</li>
                             <li>Location?</li>
                         </ul>
                     </Notes>
@@ -736,26 +866,29 @@ export default class Presentation extends React.Component {
                         width="55%"
                     >
                         <StyledList textFont="primary" textColor="quaternary">
-                            <ListItem>
-                                <S type="bold" textSize="2.75rem">
+                            <ListItem textSize="2.25rem">
+                                A toolkit for running codemods over multiple JS files
+                            </ListItem>
+                            <ListItem margin="0.5rem 0 0 0">
+                                <S type="bold" textSize="2.25rem">
                                     js-codemod
                                 </S>
                                 <List>
-                                    <ListItem textSize="2.25rem">
+                                    <ListItem textSize="2rem">
                                         Convert <code>var</code> to <code>const</code> or <code>let</code>
                                     </ListItem>
-                                    <ListItem textSize="2.25rem">
+                                    <ListItem textSize="2rem">
                                         Transform object literals to use ES6 shorthand
                                     </ListItem>
                                 </List>
                             </ListItem>
                             <ListItem margin="0.5rem 0 0 0">
-                                <S type="bold" textSize="2.75rem">
+                                <S type="bold" textSize="2.25rem">
                                     react-codemod
                                 </S>
                                 <List>
-                                    <ListItem textSize="2.25rem">rename-unsafe-lifecycles</ListItem>
-                                    <ListItem textSize="2.25rem">React-PropTypes-to-prop-types</ListItem>
+                                    <ListItem textSize="2rem">rename-unsafe-lifecycles</ListItem>
+                                    <ListItem textSize="2rem">React-PropTypes-to-prop-types</ListItem>
                                 </List>
                             </ListItem>
                         </StyledList>
@@ -769,7 +902,7 @@ export default class Presentation extends React.Component {
 
                 <Slide bgColor="secondary" transition={["zoom"]} progressColor="primary">
                     <SlideTitle textColor="primary" size={4}>
-                        Parsers at a glance
+                        Compilers at a glance
                     </SlideTitle>
                     <SlideTitleSecondary textColor="tertiary" size={6} textSize="1.5rem">
                         What is an AST?
